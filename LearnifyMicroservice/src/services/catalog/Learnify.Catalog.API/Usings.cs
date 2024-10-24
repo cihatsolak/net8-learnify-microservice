@@ -6,3 +6,5 @@ global using Microsoft.EntityFrameworkCore;
 global using MongoDB.EntityFrameworkCore.Extensions;
 global using Microsoft.EntityFrameworkCore.Metadata.Builders;
 global using System.Reflection;
+global using Learnify.Catalog.API.Options;
+global using System.ComponentModel.DataAnnotations;
