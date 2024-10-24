@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "catalog", "catalog", "{C50F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Learnify.Catalog.API", "src\services\catalog\Learnify.Catalog.API\Learnify.Catalog.API.csproj", "{93FEA4B1-0A1E-47D7-B370-DF764A77DC63}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{2AC64760-983A-41FE-BC75-06DFB5CF70DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{93FEA4B1-0A1E-47D7-B370-DF764A77DC63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93FEA4B1-0A1E-47D7-B370-DF764A77DC63}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93FEA4B1-0A1E-47D7-B370-DF764A77DC63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AC64760-983A-41FE-BC75-06DFB5CF70DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AC64760-983A-41FE-BC75-06DFB5CF70DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AC64760-983A-41FE-BC75-06DFB5CF70DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AC64760-983A-41FE-BC75-06DFB5CF70DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
