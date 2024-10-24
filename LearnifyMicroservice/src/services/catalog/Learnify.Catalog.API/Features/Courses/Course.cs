@@ -7,7 +7,7 @@ public sealed class Course : BaseEntity
     public decimal Price { get; set; }
     public Guid UserId { get; set; }
     public string Picture { get; set; }
-    public DateTime CreatedDate { get; set; }
+    public DateTime Created { get; set; }
 
     public Guid CategoryId { get; set; }
     public Category Category { get; set; }
