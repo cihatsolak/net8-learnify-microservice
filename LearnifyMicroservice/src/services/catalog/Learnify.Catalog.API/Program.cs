@@ -3,7 +3,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddOptionsExt<MongoOption>();
+builder.Services.AddOptionsExt<MongoDbOption>();
+
+builder.Services.AddDatabaseServiceExt();
 
 var app = builder.Build();
 

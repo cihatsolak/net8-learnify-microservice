@@ -1,6 +1,6 @@
 ﻿namespace Learnify.Catalog.API.Options;
 
-public sealed class MongoOption
+public sealed class MongoDbOption
 {
     [Required]
     public string DatabaseName { get; set; }
