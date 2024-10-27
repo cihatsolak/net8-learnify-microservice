@@ -17,4 +17,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.9.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\shared\Learnify.Shared\Learnify.Shared.csproj" />
+  </ItemGroup>
+
 </Project>
