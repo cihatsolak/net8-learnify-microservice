@@ -12,4 +12,3 @@ public static class OptionExtension
         return services;
     }
 }
-:

@@ -4,8 +4,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddOptionsExt<MongoDbOption>();
-
 builder.Services.AddDatabaseServiceExt();
+builder.Services.AddCommonServiceExt();
 
 var app = builder.Build();
 
