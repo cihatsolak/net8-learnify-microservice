@@ -16,8 +16,8 @@ public static class EndpointResultExt
     {
         return serviceResult.Status switch
         {
-            StatusCodes.Status200OK => Results.Ok(serviceResult),
-            StatusCodes.Status201Created => Results.Created(serviceResult.UrlAsCreated, serviceResult),
+            StatusCodes.Status200OK => Results.Ok(serviceResult.Data),
+            StatusCodes.Status201Created => Results.Created(serviceResult.UrlAsCreated, serviceResult.Data),
             StatusCodes.Status404NotFound => Results.NotFound(serviceResult.Fail),
             _ => Results.Problem(serviceResult.Fail)
         };
