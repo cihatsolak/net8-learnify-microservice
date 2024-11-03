@@ -18,3 +18,4 @@ global using MongoDB.Driver;
 global using MongoDB.EntityFrameworkCore.Extensions;
 global using System.ComponentModel.DataAnnotations;
 global using System.Reflection;
+global using AutoMapper;

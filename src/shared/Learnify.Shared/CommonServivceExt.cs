@@ -1,7 +1,4 @@
-﻿using FluentValidation;
-using FluentValidation.AspNetCore;
-
-namespace Learnify.Shared;
+﻿namespace Learnify.Shared;
 
 public static class CommonServivceExt
 {
@@ -14,6 +11,8 @@ public static class CommonServivceExt
 
         services.AddFluentValidationAutoValidation();
         services.AddValidatorsFromAssembly(Assembly.GetCallingAssembly());
+
+        services.AddAutoMapper(Assembly.GetCallingAssembly());
 
         return services;
     }

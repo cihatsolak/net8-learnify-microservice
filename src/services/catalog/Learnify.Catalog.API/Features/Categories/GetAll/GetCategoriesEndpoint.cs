@@ -2,13 +2,13 @@
 
 public sealed record GetCategoriesQuery : IRequest<ServiceResult<List<CategoryResponse>>>;
 
-public class GetCategoriesHandler(AppDbContext context) : IRequestHandler<GetCategoriesQuery, ServiceResult<List<CategoryResponse>>>
+public class GetCategoriesHandler(AppDbContext context, IMapper mapper) : IRequestHandler<GetCategoriesQuery, ServiceResult<List<CategoryResponse>>>
 {
     public async Task<ServiceResult<List<CategoryResponse>>> Handle(GetCategoriesQuery request, CancellationToken cancellationToken)
     {
         var categories = await context.Categories.ToListAsync(cancellationToken);
-        var mappedCategories = categories.Select(category => new CategoryResponse(category.Id, category.Name)).ToList();
-        
+        var mappedCategories = mapper.Map<List<CategoryResponse>>(categories);
+
         return ServiceResult<List<CategoryResponse>>.SuccessAsOk(mappedCategories);
     }
 }
