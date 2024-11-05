@@ -4,8 +4,9 @@ public static class CategoryEndpointExt
 {
     public static void AddCategoryGroupEndpointExt(this WebApplication app)
     {
-        app.MapGroup("app/categories")
+        app.MapGroup("api/categories")
             .CreateCategoryGroupItemEndpoint()
-            .GetCategoriesGroupItemEndpoint();
+            .GetCategoriesGroupItemEndpoint()
+            .GetCategoryByIdGroupItemEndpoint();
     }
 }

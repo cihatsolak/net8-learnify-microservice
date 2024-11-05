@@ -1,6 +1,19 @@
-@Learnify.Catalog.API_HostAddress = http://localhost:5203
+@baseAddress = http://localhost:5203
+@categoryId = 08dcfc41-c7cd-3d55-dc4a-3eefe35b0000
 
-GET {{Learnify.Catalog.API_HostAddress}}/weatherforecast/
+GET {{baseAddress}}/api/categories
 Accept: application/json
 
 ###
+
+POST {{baseAddress}}/api/categories
+Accept: application/json
+Content-Type: application/json
+{
+  "name": "Category 1",
+  "description": "Category 1 description"
+}
+
+###
+GET {{baseAddress}}/api/categories/{{categoryId}}
+Accept: application/json

@@ -19,7 +19,7 @@ public static class GetCategoriesEndpoint
     {
         routeGroupBuilder.MapGet("/", async (IMediator mediator) =>
         {
-            return (await mediator.Send(new GetCategoriesQuery())).ToGenericResult();
+            return await mediator.Send(new GetCategoriesQuery()).ToGenericResultAsync();
         });
 
         return routeGroupBuilder;
