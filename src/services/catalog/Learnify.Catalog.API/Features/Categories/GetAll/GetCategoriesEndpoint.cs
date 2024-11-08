@@ -1,6 +1,6 @@
 ﻿namespace Learnify.Catalog.API.Features.Categories.GetAll;
 
-public sealed record GetCategoriesQuery : IRequest<ServiceResult<List<CategoryResponse>>>;
+public sealed record GetCategoriesQuery : IRequestResult<List<CategoryResponse>>;
 
 public class GetCategoriesHandler(AppDbContext context, IMapper mapper) : IRequestHandler<GetCategoriesQuery, ServiceResult<List<CategoryResponse>>>
 {

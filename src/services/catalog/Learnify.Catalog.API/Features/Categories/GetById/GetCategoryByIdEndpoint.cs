@@ -1,6 +1,6 @@
 ﻿namespace Learnify.Catalog.API.Features.Categories.GetById;
 
-public sealed record GetCategoryByIdRequest(Guid Id) : IRequest<ServiceResult<CategoryResponse>>;
+public sealed record GetCategoryByIdRequest(Guid Id) : IRequestResult<CategoryResponse>;
 
 public sealed class GetCategoryByIdHandler(AppDbContext context, IMapper mapper) 
     : IRequestHandler<GetCategoryByIdRequest, ServiceResult<CategoryResponse>>
@@ -11,7 +11,7 @@ public sealed class GetCategoryByIdHandler(AppDbContext context, IMapper mapper)
         if (category is null)
         {
             return ServiceResult<CategoryResponse>.
-                Error("Category not found",$"The Category with Id ({request.Id}) was not found.", StatusCodes.Status404NotFound);
+                Error("Category not found",$"The category with Id ({request.Id}) was not found.", StatusCodes.Status404NotFound);
         }
 
         return ServiceResult<CategoryResponse>.SuccessAsOk(mapper.Map<CategoryResponse>(category));

@@ -1,5 +1,8 @@
 ﻿namespace Learnify.Shared;
 
+public interface IRequestResult<TResponse> : IRequest<ServiceResult<TResponse>>;
+public interface IRequestResult : IRequest<ServiceResult>;
+
 public class ServiceResult
 {
     [JsonIgnore] public int Status { get; set; }
@@ -112,7 +115,7 @@ public class ServiceResult
     }
 }
 
-public class ServiceResult<T> : ServiceResult where T : class
+public class ServiceResult<T> : ServiceResult
 {
     public T Data { get; set; }
     [JsonIgnore] public string UrlAsCreated { get; set; }

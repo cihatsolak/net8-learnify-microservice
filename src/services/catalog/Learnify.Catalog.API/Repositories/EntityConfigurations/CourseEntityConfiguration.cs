@@ -12,7 +12,7 @@ public sealed class CourseEntityConfiguration : IEntityTypeConfiguration<Course>
         builder.Property(course => course.Created).HasElementName("created");
         builder.Property(course => course.UserId).HasElementName("user_id");
         builder.Property(course => course.CategoryId).HasElementName("category_id");
-        builder.Property(course => course.Picture).HasElementName("picture");
+        builder.Property(course => course.ImageUrl).HasElementName("image_url").HasMaxLength(200);
 
         builder.OwnsOne(course => course.Feature, feature =>
         {

@@ -16,6 +16,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.AddCategoryGroupEndpointExt();
+app.AddCourseGroupEndpointExt();
 
 await app.RunAsync();
 

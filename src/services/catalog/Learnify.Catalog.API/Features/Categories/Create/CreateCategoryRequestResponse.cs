@@ -4,7 +4,7 @@
 /// Command to create a new category.
 /// </summary>
 /// <param name="Name">The name of the category.</param>
-public sealed record CreateCategoryCommand(string Name) : IRequest<ServiceResult<CreateCategoryResponse>>;
+public sealed record CreateCategoryCommand(string Name) : IRequestResult<CreateCategoryResponse>;
 
 /// <summary>
 /// Response containing the ID of the newly created category.

@@ -14,7 +14,7 @@ public static class EndpointResultExt
         };
     }
 
-    public static async Task<IResult> ToGenericResultAsync<T>(this Task<ServiceResult<T>> taskServiceResult) where T : class
+    public static async Task<IResult> ToGenericResultAsync<T>(this Task<ServiceResult<T>> taskServiceResult)
     {
         var serviceResult = await taskServiceResult;
 
