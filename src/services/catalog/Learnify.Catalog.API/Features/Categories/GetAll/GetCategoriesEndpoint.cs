@@ -22,6 +22,8 @@ public static class GetCategoriesEndpoint
             return await mediator.Send(new GetCategoriesQuery()).ToGenericResultAsync();
         });
 
+        routeGroupBuilder.WithName("GetCategories");
+
         return routeGroupBuilder;
     }
 }

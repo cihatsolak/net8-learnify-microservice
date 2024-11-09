@@ -13,6 +13,7 @@ global using Learnify.Shared.Extensions;
 global using Learnify.Shared.Filters;
 global using MassTransit;
 global using MediatR;
+global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.EntityFrameworkCore.Metadata.Builders;
 global using Microsoft.Extensions.Options;

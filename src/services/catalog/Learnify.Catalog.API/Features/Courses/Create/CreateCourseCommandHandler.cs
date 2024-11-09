@@ -9,8 +9,8 @@ public sealed class CreateCourseCommandHandler(AppDbContext context, IMapper map
         if (!isCategoryExists)
         {
             return ServiceResult<Guid>.Error(
-                "Category not found.", 
-                $"The category with id({request.CategoryId}) was not found.", 
+                "Category not found.",
+                $"The category with id({request.CategoryId}) was not found.",
                 StatusCodes.Status404NotFound);
         }
 
@@ -19,11 +19,17 @@ public sealed class CreateCourseCommandHandler(AppDbContext context, IMapper map
         {
             return ServiceResult<Guid>.Error(
                 "Course already exists.",
-                $"The course with name({request.Name}) already exists.",
+                $"The course with name ({request.Name}) already exists.",
                 StatusCodes.Status400BadRequest);
         }
 
         var course = mapper.Map<Course>(request);
+        course.Feature = new()
+        {
+            Duration = 10, //calculate from video length
+            EducatorFullName = "Cihat Solak", //token user
+            Rating = 0 //calculate from user ratings
+        };
 
         await context.Courses.AddAsync(course, cancellationToken);
         await context.SaveChangesAsync(cancellationToken);

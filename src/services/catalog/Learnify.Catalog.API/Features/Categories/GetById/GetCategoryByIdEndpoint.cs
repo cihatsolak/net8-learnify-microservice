@@ -27,6 +27,8 @@ public static class GetCategoryByIdEndpoint
             return await mediator.Send(new GetCategoryByIdRequest(id)).ToGenericResultAsync();
         });
 
+        routeGroupBuilder.WithName("GetCategoryById");
+
         return routeGroupBuilder;
     }
 }
