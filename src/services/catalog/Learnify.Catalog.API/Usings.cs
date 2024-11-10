@@ -1,4 +1,5 @@
 ﻿global using AutoMapper;
+global using AutoMapper.QueryableExtensions;
 global using FluentValidation;
 global using Learnify.Catalog.API.Features.Categories;
 global using Learnify.Catalog.API.Features.Categories.Create;
@@ -6,6 +7,8 @@ global using Learnify.Catalog.API.Features.Categories.GetAll;
 global using Learnify.Catalog.API.Features.Categories.GetById;
 global using Learnify.Catalog.API.Features.Courses;
 global using Learnify.Catalog.API.Features.Courses.Create;
+global using Learnify.Catalog.API.Features.Courses.GetAll;
+global using Learnify.Catalog.API.Features.Courses.GetById;
 global using Learnify.Catalog.API.Options;
 global using Learnify.Catalog.API.Repositories;
 global using Learnify.Shared;

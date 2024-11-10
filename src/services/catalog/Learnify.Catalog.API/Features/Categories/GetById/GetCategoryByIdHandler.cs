@@ -1,6 +1,18 @@
 ﻿namespace Learnify.Catalog.API.Features.Categories.GetById;
 
-public sealed record GetCategoryByIdRequest(Guid Id) : IRequestResult<CategoryResponse>;
+public static class GetCategoryByIdEndpoint
+{
+    public static RouteGroupBuilder GetCategoryByIdGroupItemEndpoint(this RouteGroupBuilder routeGroupBuilder)
+    {
+        routeGroupBuilder.MapGet("/{id:guid}", async (Guid id, IMediator mediator) =>
+        {
+            return await mediator.Send(new GetCategoryByIdRequest(id)).ToGenericResultAsync();
+        })
+        .WithName("GetCategoryById");
+
+        return routeGroupBuilder;
+    }
+}
 
 public sealed class GetCategoryByIdHandler(AppDbContext context, IMapper mapper) 
     : IRequestHandler<GetCategoryByIdRequest, ServiceResult<CategoryResponse>>
@@ -15,20 +27,5 @@ public sealed class GetCategoryByIdHandler(AppDbContext context, IMapper mapper)
         }
 
         return ServiceResult<CategoryResponse>.SuccessAsOk(mapper.Map<CategoryResponse>(category));
-    }
-}
-
-public static class GetCategoryByIdEndpoint
-{
-    public static RouteGroupBuilder GetCategoryByIdGroupItemEndpoint(this RouteGroupBuilder routeGroupBuilder)
-    {
-        routeGroupBuilder.MapGet("/{id:guid}", async (Guid id, IMediator mediator) =>
-        {
-            return await mediator.Send(new GetCategoryByIdRequest(id)).ToGenericResultAsync();
-        });
-
-        routeGroupBuilder.WithName("GetCategoryById");
-
-        return routeGroupBuilder;
     }
 }

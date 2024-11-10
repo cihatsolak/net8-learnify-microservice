@@ -7,5 +7,8 @@ public class CourseMapping : Profile
         CreateMap<CreateCourseCommand, Course>()
             .ForMember(dest => dest.Created, opt => opt.MapFrom(src => DateTime.Now))
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => NewId.NextSequentialGuid()));
+
+        CreateMap<Course, CourseResponse>();
+        CreateMap<Feature, FeatureResponse>();
     }
 }
