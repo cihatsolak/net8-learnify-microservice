@@ -8,6 +8,7 @@ public static class CourseEndpointExt
             .WithTags("Courses")
             .CreateCourseGroupItemEndpoint()
             .GetCoursesGroupItemEndpoint()
-            .GetCourseByIdGroupItemEndpoint();
+            .GetCourseByIdGroupItemEndpoint()
+            .UpdateCourseGroupItemEndpoint();
     }
 }

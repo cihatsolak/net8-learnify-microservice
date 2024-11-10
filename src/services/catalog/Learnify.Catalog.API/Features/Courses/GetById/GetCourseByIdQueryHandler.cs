@@ -20,7 +20,6 @@ public static class GetCourseByIdEndpoint
 public sealed class GetCourseByIdQueryHandler(AppDbContext context, IMapper mapper)
     : IRequestHandler<GetCourseByIdQuery, ServiceResult<CourseResponse>>
 {
-
     public async Task<ServiceResult<CourseResponse>> Handle(GetCourseByIdQuery request, CancellationToken cancellationToken)
     {
         var course = await context.Courses.FindAsync([request.Id, cancellationToken], cancellationToken);
