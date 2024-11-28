@@ -9,6 +9,7 @@ public static class CourseEndpointExt
             .CreateCourseGroupItemEndpoint()
             .GetCoursesGroupItemEndpoint()
             .GetCourseByIdGroupItemEndpoint()
-            .UpdateCourseGroupItemEndpoint();
+            .UpdateCourseGroupItemEndpoint()
+            .DeleteCourseGroupItemEndpoint();
     }
 }
