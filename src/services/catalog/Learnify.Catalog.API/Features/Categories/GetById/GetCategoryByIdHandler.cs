@@ -8,7 +8,8 @@ public static class GetCategoryByIdEndpoint
         {
             return await mediator.Send(new GetCategoryByIdRequest(id)).ToGenericResultAsync();
         })
-        .WithName("GetCategoryById");
+        .WithName("GetCategoryById")
+        .MapToApiVersion(1, 0);
 
         return routeGroupBuilder;
     }

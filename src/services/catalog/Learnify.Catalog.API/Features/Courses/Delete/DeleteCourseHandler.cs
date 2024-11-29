@@ -9,6 +9,7 @@ public static class DeleteCourseEndpoint
             return await mediator.Send(new DeleteCourseCommand(id)).ToGenericResultAsync();
         })
        .WithName("DeleteCourse")
+       .MapToApiVersion(1, 0)
        .Produces<NoContentResult>(StatusCodes.Status204NoContent)
        .Produces<ProblemDetails>(StatusCodes.Status404NotFound)
        .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError);

@@ -9,6 +9,7 @@ public static class GetCourseByIdEndpoint
             return await mediator.Send(new GetCourseByIdQuery(id)).ToGenericResultAsync();
         })
         .WithName("GetCourseById")
+        .MapToApiVersion(1, 0)
         .Produces<CourseResponse>(StatusCodes.Status200OK)
         .Produces<ProblemDetails>(StatusCodes.Status404NotFound)
         .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError);

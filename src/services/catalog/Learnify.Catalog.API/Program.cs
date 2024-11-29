@@ -7,6 +7,8 @@ builder.Services.AddOptionsExt<MongoDbOption>();
 builder.Services.AddDatabaseServiceExt();
 builder.Services.AddCommonServiceExt();
 
+builder.Services.AddApiVersioningExt();
+
 var app = builder.Build();
 
 _ = app.AddSeedDataExtAsync().ContinueWith(task =>
@@ -27,8 +29,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.AddCategoryGroupEndpointExt();
-app.AddCourseGroupEndpointExt();
+app.AddCategoryGroupEndpointExt(app.GetVersionSetExt());
+app.AddCourseGroupEndpointExt(app.GetVersionSetExt());
 
 await app.RunAsync();
 

@@ -1,5 +1,20 @@
 ﻿namespace Learnify.Catalog.API.Features.Courses.GetAll;
 
+public static class GetCoursesEndpoint
+{
+    public static RouteGroupBuilder GetCoursesGroupItemEndpoint(this RouteGroupBuilder routeGroupBuilder)
+    {
+        routeGroupBuilder.MapGet("/", async (IMediator mediator) =>
+        {
+            return await mediator.Send(new GetCoursesQuery()).ToGenericResultAsync();
+        })
+        .WithName("Courses")
+        .MapToApiVersion(1, 0);
+
+        return routeGroupBuilder;
+    }
+}
+
 public sealed class GetCoursesHandler(AppDbContext context, IMapper mapper)
     : IRequestHandler<GetCoursesQuery, ServiceResult<List<CourseResponse>>>
 {
@@ -14,19 +29,5 @@ public sealed class GetCoursesHandler(AppDbContext context, IMapper mapper)
         }
 
         return ServiceResult<List<CourseResponse>>.SuccessAsOk(mapper.Map<List<CourseResponse>>(courses));
-    }
-}
-
-public static class GetCoursesEndpoint
-{
-    public static RouteGroupBuilder GetCoursesGroupItemEndpoint(this RouteGroupBuilder routeGroupBuilder)
-    {
-        routeGroupBuilder.MapGet("/", async (IMediator mediator) =>
-        {
-            return await mediator.Send(new GetCoursesQuery()).ToGenericResultAsync();
-        })
-        .WithName("Courses");
-
-        return routeGroupBuilder;
     }
 }

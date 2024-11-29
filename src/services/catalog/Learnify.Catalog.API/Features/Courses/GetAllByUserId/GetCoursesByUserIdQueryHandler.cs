@@ -28,7 +28,8 @@ public static class GetCoursesByUserIdEndpoint
         group.MapGet("/user/{userId:guid}",
                 async (IMediator mediator, Guid userId) =>
                     await mediator.Send(new GetCoursesByUserIdQuery(userId)).ToGenericResultAsync())
-            .WithName("GetCoursesByUserId");
+            .WithName("GetCoursesByUserId")
+            .MapToApiVersion(1, 0);
 
         return group;
     }

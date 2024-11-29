@@ -7,6 +7,7 @@ public static class CreateCourseCommandEndpoint
         routeGroupBuilder.MapPost("/", async (CreateCourseCommand command, IMediator mediator)
             => await mediator.Send(command).ToGenericResultAsync())
             .WithName("CreateCourse")
+            .MapToApiVersion(1, 0)
             .AddEndpointFilter<ValidationFilter<CreateCourseCommandValidator>>()
             .Produces<Guid>(StatusCodes.Status201Created)
             .Produces<ProblemDetails>(StatusCodes.Status400BadRequest)

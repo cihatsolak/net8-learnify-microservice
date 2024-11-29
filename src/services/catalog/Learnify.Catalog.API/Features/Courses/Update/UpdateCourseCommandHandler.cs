@@ -9,6 +9,7 @@ public static class UpdateCourseCommandEndpoint
             return await mediator.Send(command).ToGenericResultAsync();
         })
        .WithName("UpdateCourse")
+       .MapToApiVersion(1, 0)
        .Produces<ServiceResult>(StatusCodes.Status204NoContent)
        .AddEndpointFilter<ValidationFilter<UpdateCourseCommand>>();
 

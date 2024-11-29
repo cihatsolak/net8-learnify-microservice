@@ -7,6 +7,7 @@ public static class CreateCategoryEndpoint
         routeGroupBuilder.MapPost("/", async (CreateCategoryCommand command, IMediator mediator)
             => await mediator.Send(command).ToGenericResultAsync())
             .WithName("CreateCategory")
+            .MapToApiVersion(1,0)
             .AddEndpointFilter<ValidationFilter<CreateCategoryCommand>>();
 
         return routeGroupBuilder;

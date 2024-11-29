@@ -1,4 +1,5 @@
-﻿global using AutoMapper;
+﻿global using Asp.Versioning.Builder;
+global using AutoMapper;
 global using AutoMapper.QueryableExtensions;
 global using FluentValidation;
 global using Learnify.Catalog.API.Features.Categories;
