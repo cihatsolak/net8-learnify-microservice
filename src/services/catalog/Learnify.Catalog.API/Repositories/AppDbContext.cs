@@ -1,7 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MongoDB.Driver;
-
-namespace Learnify.Catalog.API.Repositories;
+﻿namespace Learnify.Catalog.API.Repositories;
 
 public sealed class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {

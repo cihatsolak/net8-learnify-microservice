@@ -9,6 +9,18 @@ builder.Services.AddCommonServiceExt();
 
 var app = builder.Build();
 
+_ = app.AddSeedDataExtAsync().ContinueWith(task =>
+{
+    if (task.IsFaulted)
+    {
+        Console.WriteLine(task.Exception?.Message);
+    }
+    else
+    {
+        Console.WriteLine("Seed data has been saved successfully.");
+    }
+});
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
