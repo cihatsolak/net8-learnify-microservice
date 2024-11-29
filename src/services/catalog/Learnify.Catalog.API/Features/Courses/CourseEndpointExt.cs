@@ -10,6 +10,7 @@ public static class CourseEndpointExt
             .GetCoursesGroupItemEndpoint()
             .GetCourseByIdGroupItemEndpoint()
             .UpdateCourseGroupItemEndpoint()
-            .DeleteCourseGroupItemEndpoint();
+            .DeleteCourseGroupItemEndpoint()
+            .GetCoursesByUserIdGroupItemEndpoint();
     }
 }

@@ -9,6 +9,7 @@ global using Learnify.Catalog.API.Features.Courses;
 global using Learnify.Catalog.API.Features.Courses.Create;
 global using Learnify.Catalog.API.Features.Courses.Delete;
 global using Learnify.Catalog.API.Features.Courses.GetAll;
+global using Learnify.Catalog.API.Features.Courses.GetAllByUserId;
 global using Learnify.Catalog.API.Features.Courses.GetById;
 global using Learnify.Catalog.API.Features.Courses.Update;
 global using Learnify.Catalog.API.Options;
