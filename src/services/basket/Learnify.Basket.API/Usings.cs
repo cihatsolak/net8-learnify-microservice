@@ -3,6 +3,7 @@ global using FluentValidation;
 global using Learnify.Basket.API.Constants;
 global using Learnify.Basket.API.Features.Baskets;
 global using Learnify.Basket.API.Features.Baskets.AddItem;
+global using Learnify.Basket.API.Features.Baskets.DeleteItem;
 global using Learnify.Shared;
 global using Learnify.Shared.Extensions;
 global using Learnify.Shared.Filters;

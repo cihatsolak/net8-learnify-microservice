@@ -7,6 +7,7 @@ public static class BasketEndpointExt
         app.MapGroup("api/v{version:apiVersion}/baskets")
             .WithTags("Baskets")
             .WithApiVersionSet(apiVersionSet)
-            .AddBasketItemGroupItemEndpoint();
+            .AddBasketItemGroupItemEndpoint()
+            .DeleteBasketItemGroupItemEndpoint();
     }
 }
