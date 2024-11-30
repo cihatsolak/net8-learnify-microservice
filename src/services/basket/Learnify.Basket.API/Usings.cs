@@ -1,1 +1,11 @@
+global using Asp.Versioning.Builder;
+global using FluentValidation;
+global using Learnify.Basket.API.Constants;
+global using Learnify.Basket.API.Features.Baskets;
+global using Learnify.Basket.API.Features.Baskets.Add;
 global using Learnify.Shared;
+global using Learnify.Shared.Extensions;
+global using Learnify.Shared.Filters;
+global using MediatR;
+global using Microsoft.Extensions.Caching.Distributed;
+global using System.Text.Json;
