@@ -2,6 +2,7 @@
 global using Asp.Versioning.Builder;
 global using FluentValidation;
 global using FluentValidation.AspNetCore;
+global using Learnify.Shared.Services;
 global using MediatR;
 global using Microsoft.AspNetCore.Builder;
 global using Microsoft.AspNetCore.Http;

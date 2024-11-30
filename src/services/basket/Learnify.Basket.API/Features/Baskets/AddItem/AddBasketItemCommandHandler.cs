@@ -1,4 +1,4 @@
-﻿namespace Learnify.Basket.API.Features.Baskets.Add;
+﻿namespace Learnify.Basket.API.Features.Baskets.AddItem;
 
 public static class AddBasketItemEndpoint
 {
@@ -15,12 +15,12 @@ public static class AddBasketItemEndpoint
     }
 }
 
-public sealed class AddBasketItemCommandHandler(IDistributedCache distributedCache)
+public sealed class AddBasketItemCommandHandler(IDistributedCache distributedCache, ITokenService tokenService)
     : IRequestHandler<AddBasketItemCommand, ServiceResult>
 {
     public async Task<ServiceResult> Handle(AddBasketItemCommand request, CancellationToken cancellationToken)
     {
-        Guid userId = Guid.NewGuid();
+        Guid userId = tokenService.UserId;
         string cacheKey = string.Format(BasketConstant.BasketCacheKey, userId);
 
         BasketDto currentBasket;

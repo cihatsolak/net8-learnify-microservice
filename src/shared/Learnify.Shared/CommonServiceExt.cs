@@ -14,6 +14,8 @@ public static class CommonServiceExt
 
         services.AddAutoMapper(Assembly.GetCallingAssembly());
 
+        services.AddSingleton<ITokenService, FakeTokenService>();
+
         return services;
     }
 

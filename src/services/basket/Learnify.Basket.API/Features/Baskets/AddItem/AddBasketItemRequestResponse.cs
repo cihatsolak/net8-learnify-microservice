@@ -1,4 +1,4 @@
-﻿namespace Learnify.Basket.API.Features.Baskets.Add;
+﻿namespace Learnify.Basket.API.Features.Baskets.AddItem;
 
 public sealed record AddBasketItemCommand(
     Guid CourseId,
