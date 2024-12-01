@@ -1,9 +1,12 @@
 ﻿namespace Learnify.Basket.API.Features.Baskets.Get;
 
-public sealed class GetBasketQueryHandler(IDistributedCache distributedCache, ITokenService tokenService)
-        : IRequestHandler<GetBasketQuery, ServiceResult<BasketDto>>
+public sealed class GetBasketQueryHandler(
+    IDistributedCache distributedCache, 
+    ITokenService tokenService,
+    IMapper mapper)
+        : IRequestHandler<GetBasketQuery, ServiceResult<BasketResponse>>
 {
-    public async Task<ServiceResult<BasketDto>> Handle(GetBasketQuery request, CancellationToken cancellationToken)
+    public async Task<ServiceResult<BasketResponse>> Handle(GetBasketQuery request, CancellationToken cancellationToken)
     {
         Guid userId = tokenService.UserId;
         string cacheKey = string.Format(BasketConstant.BasketCacheKey, userId);
@@ -11,15 +14,17 @@ public sealed class GetBasketQueryHandler(IDistributedCache distributedCache, IT
         string basketAsString = await distributedCache.GetStringAsync(cacheKey, cancellationToken);
         if (string.IsNullOrEmpty(basketAsString))
         {
-            return ServiceResult<BasketDto>.Error("Basket not found", StatusCodes.Status404NotFound);
+            return ServiceResult<BasketResponse>.Error("Basket not found", StatusCodes.Status404NotFound);
         }
 
-        var basketDto = JsonSerializer.Deserialize<BasketDto>(basketAsString)!;
-        if (basketDto is null)
+        var basket = JsonSerializer.Deserialize<Basket>(basketAsString)!;
+        if (basket is null)
         {
-            return ServiceResult<BasketDto>.Error("Basket not found", StatusCodes.Status404NotFound);
+            return ServiceResult<BasketResponse>.Error("Basket not found", StatusCodes.Status404NotFound);
         }
 
-        return ServiceResult<BasketDto>.SuccessAsOk(basketDto);
+        var basketResponse = mapper.Map<BasketResponse>(basket);
+
+        return ServiceResult<BasketResponse>.SuccessAsOk(basketResponse);
     }
 }

@@ -1,4 +1,5 @@
 global using Asp.Versioning.Builder;
+global using AutoMapper;
 global using FluentValidation;
 global using Learnify.Basket.API.Constants;
 global using Learnify.Basket.API.Features.Baskets;

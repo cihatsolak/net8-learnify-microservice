@@ -14,7 +14,7 @@ public sealed class DeleteBasketItemCommandHandler(IDistributedCache distributed
             return ServiceResult.Error("Basket not found.", StatusCodes.Status404NotFound);
         }
 
-        BasketDto currentBasket = JsonSerializer.Deserialize<BasketDto>(basketAsString);
+        Basket currentBasket = JsonSerializer.Deserialize<Basket>(basketAsString);
         if (currentBasket is null)
         {
             return ServiceResult.Error("Basket not found.", StatusCodes.Status404NotFound);

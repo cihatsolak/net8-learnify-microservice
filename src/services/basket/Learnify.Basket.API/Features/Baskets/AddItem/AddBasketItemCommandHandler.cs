@@ -8,19 +8,19 @@ public sealed class AddBasketItemCommandHandler(IDistributedCache distributedCac
         Guid userId = tokenService.UserId;
         string cacheKey = string.Format(BasketConstant.BasketCacheKey, userId);
 
-        BasketDto currentBasket;
-        BasketItemDto newBasketItem = new(request.CourseId, request.CourseName, request.ImageUrl, request.CoursePrice, null);
+        Basket currentBasket;
+        BasketItem newBasketItem = new(request.CourseId, request.CourseName, request.ImageUrl, request.CoursePrice, null);
 
         string basketAsString = await distributedCache.GetStringAsync(cacheKey, cancellationToken);
         if (string.IsNullOrEmpty(basketAsString))
         {
-            currentBasket = new BasketDto(userId, [newBasketItem]);
+            currentBasket = new Basket(userId, [newBasketItem]);
 
             return await CreateCacheAsync(currentBasket, cacheKey, cancellationToken);
         }
 
-        currentBasket = JsonSerializer.Deserialize<BasketDto>(basketAsString);
-        currentBasket ??= new BasketDto(userId, [newBasketItem]);
+        currentBasket = JsonSerializer.Deserialize<Basket>(basketAsString);
+        currentBasket ??= new Basket(userId, [newBasketItem]);
 
         var existingBasketItemDto = currentBasket.Items.Find(basketItem => basketItem.Id == request.CourseId);
         if (existingBasketItemDto is not null)
@@ -33,7 +33,7 @@ public sealed class AddBasketItemCommandHandler(IDistributedCache distributedCac
         return await CreateCacheAsync(currentBasket, cacheKey, cancellationToken);
     }
 
-    private async Task<ServiceResult> CreateCacheAsync(BasketDto basketDto, string cacheKey, CancellationToken cancellationToken)
+    private async Task<ServiceResult> CreateCacheAsync(Basket basketDto, string cacheKey, CancellationToken cancellationToken)
     {
         string basketAsString = JsonSerializer.Serialize(basketDto);
         await distributedCache.SetStringAsync(cacheKey, basketAsString, cancellationToken);
