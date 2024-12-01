@@ -4,6 +4,7 @@ global using FluentValidation;
 global using Learnify.Basket.API.Constants;
 global using Learnify.Basket.API.Features.Baskets;
 global using Learnify.Basket.API.Features.Baskets.AddItem;
+global using Learnify.Basket.API.Features.Baskets.ApplyDiscountCoupon;
 global using Learnify.Basket.API.Features.Baskets.DeleteItem;
 global using Learnify.Basket.API.Features.Baskets.Get;
 global using Learnify.Shared;
