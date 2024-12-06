@@ -16,8 +16,4 @@
     <ProjectReference Include="..\..\..\shared\Learnify.Shared\Learnify.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Data\" />
-  </ItemGroup>
-
 </Project>

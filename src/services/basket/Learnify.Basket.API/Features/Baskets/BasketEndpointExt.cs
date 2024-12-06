@@ -10,6 +10,7 @@ public static class BasketEndpointExt
             .AddBasketItemGroupItemEndpoint()
             .DeleteBasketItemGroupItemEndpoint()
             .GetBasketGroupItemEndpoint()
-            .ApplyDiscountCouponGroupItemEndpoint();
+            .ApplyDiscountCouponGroupItemEndpoint()
+            .RemoveDiscountCouponGroupItemEndpoint();
     }
 }

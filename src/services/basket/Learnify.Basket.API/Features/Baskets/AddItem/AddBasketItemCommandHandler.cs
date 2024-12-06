@@ -30,6 +30,8 @@ public sealed class AddBasketItemCommandHandler(IDistributedCache distributedCac
 
         currentBasket.Items.Add(newBasketItem);
 
+        currentBasket.ApplyAvailableDiscount();
+
         return await CreateCacheAsync(currentBasket, cacheKey, cancellationToken);
     }
 
