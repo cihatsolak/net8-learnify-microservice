@@ -3,6 +3,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCommonServiceExt();
+builder.Services.AddSingleton<IBasketService, BasketService>();
 
 builder.Services.AddApiVersioningExt();
 

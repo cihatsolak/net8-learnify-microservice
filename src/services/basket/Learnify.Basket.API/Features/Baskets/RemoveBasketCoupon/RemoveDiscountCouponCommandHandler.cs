@@ -1,10 +1,9 @@
-﻿namespace Learnify.Basket.API.Features.Baskets.Get;
+﻿namespace Learnify.Basket.API.Features.Baskets.RemoveBasketCoupon;
 
-public sealed class GetBasketQueryHandler(
-    IBasketService basketService,
-    IMapper mapper) : IRequestHandler<GetBasketQuery, ServiceResult<BasketResponse>>
+public class RemoveDiscountCouponCommandHandler(IBasketService basketService) : IRequestHandler<RemoveDiscountCouponCommand, ServiceResult>
 {
-    public async Task<ServiceResult<BasketResponse>> Handle(GetBasketQuery request, CancellationToken cancellationToken)
+    public async Task<ServiceResult> Handle(RemoveDiscountCouponCommand request,
+        CancellationToken cancellationToken)
     {
         string basketAsJSON = await basketService.GetFromCacheAsync(cancellationToken);
         if (string.IsNullOrEmpty(basketAsJSON))
@@ -18,8 +17,10 @@ public sealed class GetBasketQueryHandler(
             return ServiceResult<BasketResponse>.Error("Basket not found", StatusCodes.Status404NotFound);
         }
 
-        BasketResponse basketResponse = mapper.Map<BasketResponse>(basket);
+        basket.ClearDiscount();
 
-        return ServiceResult<BasketResponse>.SuccessAsOk(basketResponse);
+        await basketService.UpsertCacheAsync(basket, cancellationToken);
+
+        return ServiceResult.SuccessAsNoContent();
     }
 }

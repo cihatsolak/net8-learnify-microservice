@@ -1,20 +1,16 @@
 ﻿namespace Learnify.Basket.API.Features.Baskets.ApplyDiscountCoupon;
 
-public sealed class ApplyDiscountCouponCommandHandler(ITokenService tokenService, IDistributedCache distributedCache)
-        : IRequestHandler<ApplyDiscountCouponCommand, ServiceResult>
+public sealed class ApplyDiscountCouponCommandHandler(IBasketService basketService) : IRequestHandler<ApplyDiscountCouponCommand, ServiceResult>
 {
     public async Task<ServiceResult> Handle(ApplyDiscountCouponCommand request, CancellationToken cancellationToken)
     {
-        Guid userId = tokenService.UserId;
-        string cacheKey = string.Format(BasketConstant.BasketCacheKey, userId);
-
-        string basketAsJson = await distributedCache.GetStringAsync(cacheKey, cancellationToken);
-        if (string.IsNullOrWhiteSpace(basketAsJson))
+        string basketAsJSON = await basketService.GetFromCacheAsync(cancellationToken);
+        if (string.IsNullOrWhiteSpace(basketAsJSON))
         {
             return ServiceResult<BasketResponse>.Error("Basket not found", StatusCodes.Status404NotFound);
         }
 
-        Basket basket = JsonSerializer.Deserialize<Basket>(basketAsJson);
+        Basket basket = JsonSerializer.Deserialize<Basket>(basketAsJSON);
         if (basket.Items.Count == 0)
         {
             return ServiceResult<BasketResponse>.Error("Basket not found", StatusCodes.Status404NotFound);
@@ -22,9 +18,7 @@ public sealed class ApplyDiscountCouponCommandHandler(ITokenService tokenService
 
         basket.ApplyNewDiscount(request.Coupon, request.DiscountRate);
 
-        string updatedBasketAsJson = JsonSerializer.Serialize(basket);
-
-        await distributedCache.SetStringAsync(cacheKey, updatedBasketAsJson, cancellationToken);
+        await basketService.UpsertCacheAsync(basket, cancellationToken);
 
         return ServiceResult.SuccessAsNoContent();
     }
