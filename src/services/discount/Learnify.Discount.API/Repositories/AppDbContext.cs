@@ -2,7 +2,7 @@
 
 public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
-    public DbSet<Discount> Discounts { get; set; } 
+    public DbSet<Features.Discounts.Discount> Discounts { get; set; } 
 
     public static AppDbContext Create(IMongoDatabase database)
     {

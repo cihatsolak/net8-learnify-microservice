@@ -44,6 +44,19 @@ services:
       HTTP_USER: ${REDIS_UI_USERNAME}
       HTTP_PASSWORD: ${REDIS_UI_PASSWORD}
 
+  mongo.db.discount:
+    restart: always
+    image: mongo:8.0-rc
+    container_name: mongo.db.discount.container
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    ports:
+      - "27034:27017"
+    volumes:
+      - mongo.db.discount.volume:/data/db
+
 volumes:
   mongo.db.catalog.volume:
   redis.db.basket.volume:  
+  mongo.db.discount.volume:  
