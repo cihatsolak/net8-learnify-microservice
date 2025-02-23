@@ -1,8 +1,14 @@
 ﻿global using AutoMapper;
+global using FluentValidation;
 global using Learnify.Discount.API.Options;
 global using Learnify.Discount.API.Repositories;
 global using Learnify.Shared;
 global using Learnify.Shared.Extensions;
+global using Learnify.Shared.Filters;
+global using Learnify.Shared.Services;
+global using MassTransit;
+global using MediatR;
+global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.EntityFrameworkCore.Metadata.Builders;
 global using MongoDB.Driver;
