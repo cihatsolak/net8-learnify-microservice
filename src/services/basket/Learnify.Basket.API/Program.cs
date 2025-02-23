@@ -23,4 +23,4 @@ if (app.Environment.IsDevelopment())
 
 app.AddBasketGroupEndpointExt(app.GetVersionSetExt());
 
-app.Run();
+await app.RunAsync();
