@@ -21,6 +21,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "basket", "basket", "{0A516A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Learnify.Basket.API", "src\services\basket\Learnify.Basket.API\Learnify.Basket.API.csproj", "{EE25D75A-EEFC-4BA8-876C-DE7DD808D58E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "discount", "discount", "{511D9C26-43A0-4485-A0A8-608FA15E52A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Learnify.Discount.API", "src\services\discount\Learnify.Discount.API\Learnify.Discount.API.csproj", "{5BAC53C9-A135-4B88-BBF2-4824585F1151}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +47,10 @@ Global
 		{EE25D75A-EEFC-4BA8-876C-DE7DD808D58E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE25D75A-EEFC-4BA8-876C-DE7DD808D58E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE25D75A-EEFC-4BA8-876C-DE7DD808D58E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BAC53C9-A135-4B88-BBF2-4824585F1151}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BAC53C9-A135-4B88-BBF2-4824585F1151}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BAC53C9-A135-4B88-BBF2-4824585F1151}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BAC53C9-A135-4B88-BBF2-4824585F1151}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +63,8 @@ Global
 		{ADC2BD55-B9BA-45E6-8258-DDE76CE73802} = {C6C865CE-78CE-4797-B6C9-12D70EC46CAB}
 		{0A516A81-F7EC-447D-AE67-4547AD6E03C9} = {AFC9BF81-46AD-4C18-BE2D-0E320A248D12}
 		{EE25D75A-EEFC-4BA8-876C-DE7DD808D58E} = {0A516A81-F7EC-447D-AE67-4547AD6E03C9}
+		{511D9C26-43A0-4485-A0A8-608FA15E52A0} = {AFC9BF81-46AD-4C18-BE2D-0E320A248D12}
+		{5BAC53C9-A135-4B88-BBF2-4824585F1151} = {511D9C26-43A0-4485-A0A8-608FA15E52A0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6F052CC1-E082-4E5E-A225-3875DD6369D9}
