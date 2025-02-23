@@ -14,6 +14,8 @@ builder.Services.AddApiVersioningExt();
 
 var app = builder.Build();
 
+app.AddDiscountGroupEndpointExt(app.GetVersionSetExt());
+
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();

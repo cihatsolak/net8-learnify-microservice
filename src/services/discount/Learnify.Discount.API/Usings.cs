@@ -1,11 +1,14 @@
-﻿global using AutoMapper;
+﻿global using Asp.Versioning.Builder;
+global using AutoMapper;
 global using FluentValidation;
+global using Learnify.Discount.API.Features.Discounts;
+global using Learnify.Discount.API.Features.Discounts.CreateDiscount;
+global using Learnify.Discount.API.Features.Discounts.GetDiscountByCode;
 global using Learnify.Discount.API.Options;
 global using Learnify.Discount.API.Repositories;
 global using Learnify.Shared;
 global using Learnify.Shared.Extensions;
 global using Learnify.Shared.Filters;
-global using Learnify.Shared.Services;
 global using MassTransit;
 global using MediatR;
 global using Microsoft.AspNetCore.Mvc;
