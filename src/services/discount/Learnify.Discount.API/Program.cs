@@ -1,5 +1,3 @@
-using Learnify.Discount.API.Options;
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
@@ -9,12 +7,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddOptionsExt<MongoDbOption>();
+builder.Services.AddDatabaseServiceExt();
 builder.Services.AddCommonServiceExt();
 
 builder.Services.AddApiVersioningExt();
 
 var app = builder.Build();
-
 
 if (app.Environment.IsDevelopment())
 {

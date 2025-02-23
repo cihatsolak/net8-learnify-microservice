@@ -1,2 +1,11 @@
-﻿global using Learnify.Shared;
+﻿global using AutoMapper;
+global using Learnify.Discount.API.Options;
+global using Learnify.Discount.API.Repositories;
+global using Learnify.Shared;
 global using Learnify.Shared.Extensions;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore.Metadata.Builders;
+global using MongoDB.Driver;
+global using MongoDB.EntityFrameworkCore.Extensions;
+global using System.ComponentModel.DataAnnotations;
+global using System.Reflection;
