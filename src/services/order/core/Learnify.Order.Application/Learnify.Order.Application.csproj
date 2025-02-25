@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Learnify.Order.Domain\Learnify.Order.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
