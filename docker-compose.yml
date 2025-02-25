@@ -31,18 +31,18 @@ services:
     volumes:
       - redis.db.basket.volume:/data
 
-  redis.db.basket.ui:
-    restart: always
-    image: rediscommander/redis-commander:latest
-    container_name: redis.db.basket.ui.container
-    ports:
-      - "27033:8081"
-    environment:
-      REDIS_HOST: redis.db.basket
-      REDIS_PORT: 6379
-      REDIS_PASSWORD: ${REDIS_PASSWORD}
-      HTTP_USER: ${REDIS_UI_USERNAME}
-      HTTP_PASSWORD: ${REDIS_UI_PASSWORD}
+  # redis.db.basket.ui:
+  #   restart: always
+  #   image: rediscommander/redis-commander:latest
+  #   container_name: redis.db.basket.ui.container
+  #   ports:
+  #     - "27033:8081"
+  #   environment:
+  #     REDIS_HOST: redis.db.basket
+  #     REDIS_PORT: 6379
+  #     REDIS_PASSWORD: ${REDIS_PASSWORD}
+  #     HTTP_USER: ${REDIS_UI_USERNAME}
+  #     HTTP_PASSWORD: ${REDIS_UI_PASSWORD}
 
   mongo.db.discount:
     restart: always
@@ -56,7 +56,20 @@ services:
     volumes:
       - mongo.db.discount.volume:/data/db
 
+  sqlserver.db.order:
+      image: mcr.microsoft.com/mssql/server:2022-latest
+      container_name: sqlserver.db.order
+      user: root
+      environment:
+        SA_PASSWORD: ${SA_PASSWORD}
+        ACCEPT_EULA: "Y"
+      ports:
+        - "1433:1433"
+      volumes:
+        - sqlserver.db.order.volume:/var/opt/mssql
+
 volumes:
   mongo.db.catalog.volume:
   redis.db.basket.volume:  
-  mongo.db.discount.volume:  
+  mongo.db.discount.volume:
+  sqlserver.db.order.volume:  
