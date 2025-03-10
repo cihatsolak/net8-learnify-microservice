@@ -1,6 +1,6 @@
 ﻿namespace Learnify.Order.Persistence.Repositories;
 
-public sealed class GenericRepository<TId, TEntity>(AppDbContext context) 
+public class GenericRepository<TId, TEntity>(AppDbContext context)
     : IGenericRepository<TId, TEntity> where TId : struct
                                        where TEntity : BaseEntity<TId>
 {

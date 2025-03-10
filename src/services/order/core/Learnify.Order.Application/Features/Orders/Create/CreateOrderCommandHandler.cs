@@ -28,7 +28,6 @@ public sealed class CreateOrderCommandHandler(
 
         order.Address = newAddress;
 
-
         await orderRepository.AddAsync(order);
         await unitOfWork.CommitAsync(cancellationToken);
 
