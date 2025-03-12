@@ -1,4 +1,4 @@
-﻿namespace Learnify.Order.API.Endpoints.Orders;
+﻿namespace Learnify.Order.API.Endpoints.CreateOrder;
 
 public static class CreateOrderEndpoint
 {

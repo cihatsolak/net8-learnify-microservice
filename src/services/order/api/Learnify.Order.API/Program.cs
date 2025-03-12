@@ -1,3 +1,5 @@
+using Learnify.Order.API.Endpoints.CreateOrder;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOpenApi();

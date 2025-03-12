@@ -1,4 +1,6 @@
-﻿global using FluentValidation;
+﻿global using AutoMapper;
+global using FluentValidation;
+global using Learnify.Order.Application.Features.Orders.Create;
 global using Learnify.Order.Application.Interfaces;
 global using Learnify.Order.Domain.Entities;
 global using Learnify.Shared;

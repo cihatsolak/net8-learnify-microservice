@@ -1,4 +1,4 @@
-﻿namespace Learnify.Order.API.Endpoints.Orders;
+﻿namespace Learnify.Order.API.Endpoints.CreateOrder;
 
 public static class OrderEndpointExt
 {
@@ -7,6 +7,7 @@ public static class OrderEndpointExt
         app.MapGroup("api/v{version:apiVersion}/orders")
             .WithTags("Orders")
             .WithApiVersionSet(apiVersionSet)
-            .CreateOrderGroupItemEndpoint();
+            .CreateOrderGroupItemEndpoint()
+            .GetOrdersGroupItemEndpoint();
     }
 }
