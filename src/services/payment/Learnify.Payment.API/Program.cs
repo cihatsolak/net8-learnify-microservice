@@ -6,7 +6,10 @@ builder.Services.AddCommonServiceExt();
 
 builder.Services.AddApiVersioningExt();
 
-
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    options.UseInMemoryDatabase("payment-in-memory-db");
+});
 
 var app = builder.Build();
 
