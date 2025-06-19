@@ -1,0 +1,6 @@
+@Learnify.Payment.API_HostAddress = http://localhost:5016
+
+GET {{Learnify.Payment.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

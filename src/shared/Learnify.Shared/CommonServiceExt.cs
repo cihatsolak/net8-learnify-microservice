@@ -9,7 +9,7 @@ public static class CommonServiceExt
             options.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
         });
 
-        services.AddFluentValidationAutoValidation();
+        //services.AddFluentValidationAutoValidation();
         services.AddValidatorsFromAssembly(Assembly.GetCallingAssembly());
 
         services.AddAutoMapper(Assembly.GetCallingAssembly());
