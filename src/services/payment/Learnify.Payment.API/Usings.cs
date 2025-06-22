@@ -1,6 +1,7 @@
 ﻿global using Asp.Versioning.Builder;
 global using FluentValidation;
 global using Learnify.Payment.API.Features.Payments.Create;
+global using Learnify.Payment.API.Features.Payments.GetAll;
 global using Learnify.Payment.API.Repositories;
 global using Learnify.Shared;
 global using Learnify.Shared.Extensions;
