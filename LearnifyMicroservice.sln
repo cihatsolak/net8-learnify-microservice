@@ -49,6 +49,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "payment", "payment", "{FC03
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Learnify.Payment.API", "src\services\payment\Learnify.Payment.API\Learnify.Payment.API.csproj", "{295BF50C-764B-4BEF-8AE4-50BEF376B125}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "gateway", "gateway", "{CBFD4FB1-C4D6-414A-8FFE-15E792585235}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Learnify.Gateway", "src\services\gateway\Learnify.Gateway\Learnify.Gateway.csproj", "{8035491B-1C2D-4407-B7B4-CF7B78B17575}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +103,10 @@ Global
 		{295BF50C-764B-4BEF-8AE4-50BEF376B125}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{295BF50C-764B-4BEF-8AE4-50BEF376B125}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{295BF50C-764B-4BEF-8AE4-50BEF376B125}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8035491B-1C2D-4407-B7B4-CF7B78B17575}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8035491B-1C2D-4407-B7B4-CF7B78B17575}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8035491B-1C2D-4407-B7B4-CF7B78B17575}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8035491B-1C2D-4407-B7B4-CF7B78B17575}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -125,6 +133,8 @@ Global
 		{97526D40-3047-419A-9101-F680D27E1E4A} = {B47D26DF-CB95-4CD4-8227-92CD91869D03}
 		{FC034E6D-CBE0-4E5A-9E53-D8A31087D4D9} = {AFC9BF81-46AD-4C18-BE2D-0E320A248D12}
 		{295BF50C-764B-4BEF-8AE4-50BEF376B125} = {FC034E6D-CBE0-4E5A-9E53-D8A31087D4D9}
+		{CBFD4FB1-C4D6-414A-8FFE-15E792585235} = {AFC9BF81-46AD-4C18-BE2D-0E320A248D12}
+		{8035491B-1C2D-4407-B7B4-CF7B78B17575} = {CBFD4FB1-C4D6-414A-8FFE-15E792585235}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6F052CC1-E082-4E5E-A225-3875DD6369D9}
