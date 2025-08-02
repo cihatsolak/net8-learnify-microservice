@@ -1,4 +1,4 @@
-﻿namespace Learnify.Shared;
+﻿namespace Learnify.Shared.Extensions;
 
 public static class CommonServiceExt
 {
@@ -12,7 +12,7 @@ public static class CommonServiceExt
         //services.AddFluentValidationAutoValidation();
         services.AddValidatorsFromAssembly(Assembly.GetCallingAssembly());
 
-        services.AddAutoMapper(Assembly.GetCallingAssembly());
+        services.AddAutoMapper(cfg => { }, [Assembly.GetCallingAssembly()]);
 
         services.AddSingleton<ITokenService, FakeTokenService>();
 
