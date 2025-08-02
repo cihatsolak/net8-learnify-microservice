@@ -7,9 +7,14 @@ builder.Services.AddOptionsExt<MongoDbOption>();
 builder.Services.AddDatabaseServiceExt();
 builder.Services.AddCommonServiceExt();
 
+builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);
+
 builder.Services.AddApiVersioningExt();
 
 var app = builder.Build();
+
+app.AddCategoryGroupEndpointExt(app.GetVersionSetExt());
+app.AddCourseGroupEndpointExt(app.GetVersionSetExt());
 
 _ = app.AddSeedDataExtAsync().ContinueWith(task =>
 {
@@ -29,8 +34,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.AddCategoryGroupEndpointExt(app.GetVersionSetExt());
-app.AddCourseGroupEndpointExt(app.GetVersionSetExt());
+app.UseAuthentication();
+app.UseAuthorization();
 
 await app.RunAsync();
 

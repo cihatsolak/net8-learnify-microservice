@@ -4,10 +4,11 @@ builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);
+
 builder.Services.AddOptionsExt<MongoDbOption>();
 builder.Services.AddDatabaseServiceExt();
 builder.Services.AddCommonServiceExt();
-
 builder.Services.AddApiVersioningExt();
 
 var app = builder.Build();
@@ -20,5 +21,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 await app.RunAsync();

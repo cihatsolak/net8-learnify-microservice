@@ -8,6 +8,7 @@ public static class FileEndpointExt
             .WithTags("files")
             .WithApiVersionSet(apiVersionSet)
             .UploadFileGroupItemEndpoint()
-            .DeleteFileGroupItemEndpoint();
+            .DeleteFileGroupItemEndpoint()
+            .RequireAuthorization();
     }
 }

@@ -6,8 +6,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<IFileProvider>(new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
 
+builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);
 builder.Services.AddCommonServiceExt();
-
 builder.Services.AddApiVersioningExt();
 
 var app = builder.Build();
@@ -21,5 +21,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
     app.MapOpenApi();
 }
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 await app.RunAsync();

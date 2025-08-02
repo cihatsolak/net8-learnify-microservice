@@ -1,11 +1,15 @@
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddCommonServiceExt();
+
+builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);
+
 builder.Services.AddSingleton<IBasketService, BasketService>();
 
 builder.Services.AddApiVersioningExt();
+builder.Services.AddCommonServiceExt();
 
 builder.Services.AddStackExchangeRedisCache(options =>
 {
@@ -14,13 +18,17 @@ builder.Services.AddStackExchangeRedisCache(options =>
 
 var app = builder.Build();
 
+app.AddBasketGroupEndpointExt(app.GetVersionSetExt());
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.MapOpenApi();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.AddBasketGroupEndpointExt(app.GetVersionSetExt());
+app.UseAuthentication();
+app.UseAuthorization();
 
 await app.RunAsync();

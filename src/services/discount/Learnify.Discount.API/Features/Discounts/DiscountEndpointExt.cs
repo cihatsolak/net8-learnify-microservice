@@ -8,6 +8,7 @@ public static class DiscountEndpointExt
             .WithTags("discounts")
             .WithApiVersionSet(apiVersionSet)
             .CreateDiscountGroupItemEndpoint()
-            .GetDiscountByCodeGroupItemEndpoint();
+            .GetDiscountByCodeGroupItemEndpoint()
+            .RequireAuthorization();
     }
 }
