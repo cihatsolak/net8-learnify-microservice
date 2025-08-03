@@ -1,4 +1,5 @@
-﻿namespace Learnify.Payment.API.Features.Payments.GetAll;
+﻿
+namespace Learnify.Payment.API.Features.Payments.GetAll;
 
 public static class GetAllPaymentsByUserIdEndpoint
 {
@@ -11,7 +12,8 @@ public static class GetAllPaymentsByUserIdEndpoint
             .MapToApiVersion(1, 0)
             .Produces(StatusCodes.Status200OK)
             .Produces<ProblemDetails>(StatusCodes.Status400BadRequest)
-            .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError);
+            .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError)
+            .RequireAuthorization(Policy.ClientCredential);
 
         return group;
     }

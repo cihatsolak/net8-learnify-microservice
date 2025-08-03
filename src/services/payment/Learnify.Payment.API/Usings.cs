@@ -11,3 +11,4 @@ global using MediatR;
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.EntityFrameworkCore;
 global using Learnify.Payment.API.Features.Payments;
+global using Learnify.Shared.Constants;

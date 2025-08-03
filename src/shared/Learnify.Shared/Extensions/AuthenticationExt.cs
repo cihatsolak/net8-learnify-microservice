@@ -1,6 +1,4 @@
-﻿using Learnify.Shared.Options;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
+﻿using Learnify.Shared.Constants;
 
 namespace Learnify.Shared.Extensions;
 
@@ -31,9 +29,39 @@ public static class AuthenticationExt
                     ValidateLifetime = true,
                     ValidateIssuer = true
                 };
+            })
+            .AddJwtBearer("ClientCredantialSchema", options =>
+            {
+                options.Authority = identityOptions.Authority;
+                options.Audience = identityOptions.Audience;
+                options.RequireHttpsMetadata = false; //keycloak https üzerinden ayağa kalkmadığı için kapadım.
+
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateAudience = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidateLifetime = true,
+                    ValidateIssuer = true
+                };
             });
 
-        services.AddAuthorization();
+        services.AddAuthorization(options =>
+        {
+            options.AddPolicy(Policy.ClientCredential, policy =>
+            {
+                policy.AuthenticationSchemes.Add("ClientCredantialSchema");
+                policy.RequireClaim("client_id");
+                policy.RequireAuthenticatedUser();
+            });
+
+            options.AddPolicy(Policy.Password, policy =>
+            {
+                policy.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
+                policy.RequireClaim(ClaimTypes.Email);
+                policy.RequireAuthenticatedUser();
+
+            });
+        });
 
         return services;
     }
