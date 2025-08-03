@@ -2,7 +2,7 @@
 
 public sealed class CreateOrderCommandHandler(
     IOrderRepository orderRepository,
-    ITokenService tokenService,
+    IIdentityService identityService,
     IUnitOfWork unitOfWork) : IRequestHandler<CreateOrderCommand, ServiceResult>
 {
     public async Task<ServiceResult> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
@@ -19,7 +19,7 @@ public sealed class CreateOrderCommandHandler(
             Line = request.Address.Line
         };
 
-        var order = Domain.Entities.Order.CreateUnPaidOrder(tokenService.UserId, request.DiscountRate, newAddress.Id);
+        var order = Domain.Entities.Order.CreateUnPaidOrder(identityService.UserId, request.DiscountRate, newAddress.Id);
 
         foreach (var orderItem in request.Items)
         {

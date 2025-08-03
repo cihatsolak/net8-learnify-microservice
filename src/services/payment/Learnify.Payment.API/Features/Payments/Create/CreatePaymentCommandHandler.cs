@@ -18,7 +18,7 @@ public static class CreatePaymentCommandEndpoint
     }
 }
 
-public sealed class CreatePaymentCommandHandler(AppDbContext appDbContext, ITokenService tokenService)
+public sealed class CreatePaymentCommandHandler(AppDbContext appDbContext, IIdentityService identityService)
         : IRequestHandler<CreatePaymentCommand, ServiceResult<Guid>>
 {
     public async Task<ServiceResult<Guid>> Handle(CreatePaymentCommand request, CancellationToken cancellationToken)
@@ -36,7 +36,7 @@ public sealed class CreatePaymentCommandHandler(AppDbContext appDbContext, IToke
         }
 
 
-        var userId = tokenService.UserId;
+        var userId = identityService.UserId;
         var newPayment = new Repositories.Payment(userId, request.OrderCode, request.Amount);
         newPayment.SetStatus(PaymentStatus.Success);
 

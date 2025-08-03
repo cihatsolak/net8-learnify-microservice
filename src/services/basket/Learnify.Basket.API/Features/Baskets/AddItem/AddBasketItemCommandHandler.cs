@@ -1,11 +1,11 @@
 ﻿namespace Learnify.Basket.API.Features.Baskets.AddItem;
 
-public sealed class AddBasketItemCommandHandler(ITokenService tokenService, IBasketService basketService)
+public sealed class AddBasketItemCommandHandler(IIdentityService identityService, IBasketService basketService)
     : IRequestHandler<AddBasketItemCommand, ServiceResult>
 {
     public async Task<ServiceResult> Handle(AddBasketItemCommand request, CancellationToken cancellationToken)
     {
-        Guid userId = tokenService.UserId;
+        Guid userId = identityService.UserId;
         string basketAsJSON = await basketService.GetFromCacheAsync(cancellationToken);
 
         Basket currentBasket;

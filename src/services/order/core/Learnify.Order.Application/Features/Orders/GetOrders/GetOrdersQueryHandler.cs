@@ -1,13 +1,13 @@
 ﻿namespace Learnify.Order.API.Features.GetOrders;
 
 public sealed class GetOrdersQueryHandler(
-    ITokenService tokenService,
+    IIdentityService identityService,
     IOrderRepository orderRepository,
     IMapper mapper) : IRequestHandler<GetOrdersQuery, ServiceResult<List<GetOrdersResponse>>>
 {
     public async Task<ServiceResult<List<GetOrdersResponse>>> Handle(GetOrdersQuery request, CancellationToken cancellationToken)
     {
-        var orders = await orderRepository.GetByBuyerIdAsync(tokenService.UserId);
+        var orders = await orderRepository.GetByBuyerIdAsync(identityService.UserId);
 
         var response = orders.Select(order =>
             new GetOrdersResponse(

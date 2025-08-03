@@ -19,14 +19,14 @@ public static class GetAllPaymentsByUserIdEndpoint
     }
 }
 
-public class GetAllPaymentsByUserIdQueryHandler(AppDbContext context, ITokenService tokenService)
+public class GetAllPaymentsByUserIdQueryHandler(AppDbContext context, IIdentityService identityService)
         : IRequestHandler<GetAllPaymentsByUserIdQuery, ServiceResult<List<GetAllPaymentsByUserIdResponse>>>
 {
     public async Task<ServiceResult<List<GetAllPaymentsByUserIdResponse>>> Handle(
         GetAllPaymentsByUserIdQuery request,
         CancellationToken cancellationToken)
     {
-        var userId = tokenService.UserId;
+        var userId = identityService.UserId;
 
         var payments = await context.Payments
             .Where(x => x.UserId == userId)

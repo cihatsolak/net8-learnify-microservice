@@ -6,9 +6,9 @@ public interface IBasketService
     Task UpsertCacheAsync(Basket basket, CancellationToken cancellationToken);
 }
 
-public sealed class BasketService(ITokenService tokenService, IDistributedCache distributedCache) : IBasketService
+public sealed class BasketService(IIdentityService identityService, IDistributedCache distributedCache) : IBasketService
 {
-    private string BasketCacheKey => string.Format(BasketConstant.BasketCacheKey, tokenService.UserId);
+    private string BasketCacheKey => string.Format(BasketConstant.BasketCacheKey, identityService.UserId);
 
     public Task<string> GetFromCacheAsync(CancellationToken cancellationToken)
     {
