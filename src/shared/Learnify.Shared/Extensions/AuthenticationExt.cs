@@ -1,6 +1,4 @@
-﻿using Learnify.Shared.Constants;
-
-namespace Learnify.Shared.Extensions;
+﻿namespace Learnify.Shared.Extensions;
 
 public static class AuthenticationExt
 {
@@ -27,7 +25,9 @@ public static class AuthenticationExt
                     ValidateAudience = true,
                     ValidateIssuerSigningKey = true,
                     ValidateLifetime = true,
-                    ValidateIssuer = true
+                    ValidateIssuer = true,
+                    RoleClaimType = "roles",
+                    NameClaimType = "preferred_username"
                 };
             })
             .AddJwtBearer("ClientCredantialSchema", options =>

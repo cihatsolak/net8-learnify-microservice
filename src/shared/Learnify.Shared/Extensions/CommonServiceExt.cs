@@ -14,7 +14,7 @@ public static class CommonServiceExt
 
         services.AddAutoMapper(cfg => { }, [Assembly.GetCallingAssembly()]);
 
-        services.AddSingleton<ITokenService, FakeTokenService>();
+        services.AddSingleton<IIdentityService, IdentityService>();
 
         return services;
     }

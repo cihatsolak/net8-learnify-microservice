@@ -1,6 +1,7 @@
 ﻿global using Asp.Versioning;
 global using Asp.Versioning.Builder;
 global using FluentValidation;
+global using Learnify.Shared.Constants;
 global using Learnify.Shared.Options;
 global using Learnify.Shared.Services;
 global using MediatR;
