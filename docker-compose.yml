@@ -57,6 +57,7 @@ services:
       - mongo.db.discount.volume:/data/db
 
   sqlserver.db.order:
+      restart: on-failure:2
       image: mcr.microsoft.com/mssql/server:2022-latest
       container_name: sqlserver.db.order
       user: root
@@ -115,10 +116,25 @@ services:
   #     PGADMIN_DEFAULT_PASSWORD: strong-password
   #   volumes:
   #     - postgres.db.keycloak.ui.volume:/var/lib/pgadmin
+
+  rabbitmq:
+    restart: always
+    image: rabbitmq:3.13.7-management
+    container_name: rabbitmq
+    ports:
+      - 5672:5672  
+      - 15672:15672 
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+    volumes:
+      - rabbitmq.volume:/var/lib/rabbitmq
+
 volumes:
   mongo.db.catalog.volume:
   redis.db.basket.volume:  
   mongo.db.discount.volume:
   sqlserver.db.order.volume:  
   postgres.db.keycloak.volume:
-  # postgres.db.keycloak.ui.volume:  
+  # postgres.db.keycloak.ui.volume:
+  rabbitmq.volume:

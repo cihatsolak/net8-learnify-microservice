@@ -1,14 +1,15 @@
 ﻿global using Asp.Versioning.Builder;
 global using FluentValidation;
+global using Learnify.Bus;
+global using Learnify.Payment.API.Features.Payments;
 global using Learnify.Payment.API.Features.Payments.Create;
 global using Learnify.Payment.API.Features.Payments.GetAll;
 global using Learnify.Payment.API.Repositories;
 global using Learnify.Shared;
+global using Learnify.Shared.Constants;
 global using Learnify.Shared.Extensions;
 global using Learnify.Shared.Services;
 global using MassTransit;
 global using MediatR;
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.EntityFrameworkCore;
-global using Learnify.Payment.API.Features.Payments;
-global using Learnify.Shared.Constants;

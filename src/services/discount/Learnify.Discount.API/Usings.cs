@@ -1,6 +1,7 @@
 ﻿global using Asp.Versioning.Builder;
 global using AutoMapper;
 global using FluentValidation;
+global using Learnify.Bus;
 global using Learnify.Discount.API.Features.Discounts;
 global using Learnify.Discount.API.Features.Discounts.CreateDiscount;
 global using Learnify.Discount.API.Features.Discounts.GetDiscountByCode;
@@ -18,3 +19,4 @@ global using MongoDB.Driver;
 global using MongoDB.EntityFrameworkCore.Extensions;
 global using System.ComponentModel.DataAnnotations;
 global using System.Reflection;
+

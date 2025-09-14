@@ -6,6 +6,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddOptionsExt<MongoDbOption>();
 builder.Services.AddDatabaseServiceExt();
 builder.Services.AddCommonServiceExt();
+builder.Services.AddCommonMassTransitExt(builder.Configuration);
 
 builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);
 

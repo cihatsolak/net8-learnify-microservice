@@ -10,6 +10,7 @@ builder.Services.AddOptionsExt<MongoDbOption>();
 builder.Services.AddDatabaseServiceExt();
 builder.Services.AddCommonServiceExt();
 builder.Services.AddApiVersioningExt();
+builder.Services.AddCommonMassTransitExt(builder.Configuration);
 
 var app = builder.Build();
 

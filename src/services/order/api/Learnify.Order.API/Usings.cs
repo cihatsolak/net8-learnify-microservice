@@ -1,4 +1,5 @@
 ﻿global using Asp.Versioning.Builder;
+global using Learnify.Bus;
 global using Learnify.Order.API.Endpoints.CreateOrder;
 global using Learnify.Order.API.Endpoints.Orders;
 global using Learnify.Order.API.Features.GetOrders;

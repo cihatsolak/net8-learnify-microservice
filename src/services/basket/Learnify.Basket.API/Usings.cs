@@ -8,6 +8,7 @@ global using Learnify.Basket.API.Features.Baskets.ApplyDiscountCoupon;
 global using Learnify.Basket.API.Features.Baskets.DeleteItem;
 global using Learnify.Basket.API.Features.Baskets.Get;
 global using Learnify.Basket.API.Features.Baskets.RemoveBasketCoupon;
+global using Learnify.Bus;
 global using Learnify.Shared;
 global using Learnify.Shared.Extensions;
 global using Learnify.Shared.Filters;

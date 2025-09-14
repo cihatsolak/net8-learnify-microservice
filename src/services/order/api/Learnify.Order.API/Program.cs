@@ -16,6 +16,7 @@ builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);
 builder.Services.AddCommonServiceExt();
 builder.Services.AddApiVersioningExt();
+builder.Services.AddCommonMassTransitExt(builder.Configuration);
 
 var app = builder.Build();
 app.AddOrderGroupEndpointExt(app.GetVersionSetExt());

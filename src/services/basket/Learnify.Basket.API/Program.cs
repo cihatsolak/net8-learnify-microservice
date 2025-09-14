@@ -8,6 +8,7 @@ builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);
 
 builder.Services.AddSingleton<IBasketService, BasketService>();
 
+builder.Services.AddCommonMassTransitExt(builder.Configuration);
 builder.Services.AddApiVersioningExt();
 builder.Services.AddCommonServiceExt();
 
