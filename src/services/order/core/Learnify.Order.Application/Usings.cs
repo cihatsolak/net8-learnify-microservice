@@ -1,10 +1,12 @@
 ﻿global using AutoMapper;
 global using FluentValidation;
+global using Learnify.Bus.Events;
 global using Learnify.Order.Application.Features.Orders.Create;
 global using Learnify.Order.Application.Interfaces;
 global using Learnify.Order.Domain.Entities;
 global using Learnify.Shared;
 global using Learnify.Shared.Services;
+global using MassTransit;
 global using MediatR;
 global using Microsoft.AspNetCore.Http;
 global using System.Linq.Expressions;

@@ -3,7 +3,8 @@
 public sealed class CreateOrderCommandHandler(
     IOrderRepository orderRepository,
     IIdentityService identityService,
-    IUnitOfWork unitOfWork) : IRequestHandler<CreateOrderCommand, ServiceResult>
+    IUnitOfWork unitOfWork,
+    IPublishEndpoint publishEndpoint) : IRequestHandler<CreateOrderCommand, ServiceResult>
 {
     public async Task<ServiceResult> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
@@ -41,6 +42,7 @@ public sealed class CreateOrderCommandHandler(
         orderRepository.Update(order);
         await unitOfWork.CommitAsync(cancellationToken);
 
+        await publishEndpoint.Publish(new OrderCreatedEvent(order.Id, identityService.UserId), cancellationToken);
 
         return ServiceResult.SuccessAsNoContent();
     }

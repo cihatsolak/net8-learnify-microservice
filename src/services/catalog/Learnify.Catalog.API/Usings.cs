@@ -3,6 +3,7 @@ global using AutoMapper;
 global using AutoMapper.QueryableExtensions;
 global using FluentValidation;
 global using Learnify.Bus;
+global using Learnify.Bus.Commands;
 global using Learnify.Bus.Events;
 global using Learnify.Catalog.API;
 global using Learnify.Catalog.API.Consumers;

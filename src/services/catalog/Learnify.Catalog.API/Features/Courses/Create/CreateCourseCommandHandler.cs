@@ -1,6 +1,4 @@
-﻿using Learnify.Bus.Commands;
-
-namespace Learnify.Catalog.API.Features.Courses.Create;
+﻿namespace Learnify.Catalog.API.Features.Courses.Create;
 
 public static class CreateCourseCommandEndpoint
 {
