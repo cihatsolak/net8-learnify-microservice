@@ -2,6 +2,9 @@
 global using AutoMapper;
 global using FluentValidation;
 global using Learnify.Bus;
+global using Learnify.Bus.Events;
+global using Learnify.Discount.API.Consumers;
+global using Learnify.Discount.API.Features;
 global using Learnify.Discount.API.Features.Discounts;
 global using Learnify.Discount.API.Features.Discounts.CreateDiscount;
 global using Learnify.Discount.API.Features.Discounts.GetDiscountByCode;
@@ -19,4 +22,5 @@ global using MongoDB.Driver;
 global using MongoDB.EntityFrameworkCore.Extensions;
 global using System.ComponentModel.DataAnnotations;
 global using System.Reflection;
+global using System.Security.Cryptography;
 
