@@ -19,8 +19,6 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.7" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="9.0.7" />
     <PackageReference Include="Refit.HttpClientFactory" Version="8.0.0" />
-
-	<PackageReference Include="NewId" Version="4.0.1" />
 	  
 	<FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>

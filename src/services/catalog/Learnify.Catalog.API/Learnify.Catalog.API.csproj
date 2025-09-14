@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\shared\Learnify.Bus\Learnify.Bus.csproj" />
     <ProjectReference Include="..\..\..\shared\Learnify.Shared\Learnify.Shared.csproj" />
   </ItemGroup>
 
