@@ -3,7 +3,7 @@
 public sealed record CreateCourseCommand(string Name, 
                                          string Description, 
                                          decimal Price, 
-                                         string ImageUrl,
+                                         IFormFile Picture,
                                          Guid CategoryId)
                                          : IRequestResult<Guid>;
 

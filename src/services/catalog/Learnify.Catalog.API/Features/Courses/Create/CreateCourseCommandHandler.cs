@@ -1,10 +1,12 @@
-﻿namespace Learnify.Catalog.API.Features.Courses.Create;
+﻿using Learnify.Bus.Commands;
+
+namespace Learnify.Catalog.API.Features.Courses.Create;
 
 public static class CreateCourseCommandEndpoint
 {
     public static RouteGroupBuilder CreateCourseGroupItemEndpoint(this RouteGroupBuilder routeGroupBuilder)
     {
-        routeGroupBuilder.MapPost("/", async (CreateCourseCommand command, IMediator mediator)
+        routeGroupBuilder.MapPost("/", async ([FromForm] CreateCourseCommand command, IMediator mediator)
             => await mediator.Send(command).ToGenericResultAsync())
             .WithName("CreateCourse")
             .MapToApiVersion(1, 0)
@@ -12,13 +14,14 @@ public static class CreateCourseCommandEndpoint
             .Produces<Guid>(StatusCodes.Status201Created)
             .Produces<ProblemDetails>(StatusCodes.Status400BadRequest)
             .Produces<ProblemDetails>(StatusCodes.Status404NotFound)
-            .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError);
+            .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError)
+            .DisableAntiforgery();
 
         return routeGroupBuilder;
     }
 }
 
-public sealed class CreateCourseCommandHandler(AppDbContext context, IMapper mapper)
+public sealed class CreateCourseCommandHandler(AppDbContext context, IMapper mapper, IPublishEndpoint publishEndpoint)
     : IRequestHandler<CreateCourseCommand, ServiceResult<Guid>>
 {
     public async Task<ServiceResult<Guid>> Handle(CreateCourseCommand request, CancellationToken cancellationToken)
@@ -42,6 +45,8 @@ public sealed class CreateCourseCommandHandler(AppDbContext context, IMapper map
         }
 
         var course = mapper.Map<Course>(request);
+        course.Created = DateTime.Now;
+        course.Id = NewId.NextSequentialGuid();
         course.Feature = new()
         {
             Duration = 10, //calculate from video length
@@ -51,6 +56,20 @@ public sealed class CreateCourseCommandHandler(AppDbContext context, IMapper map
 
         await context.Courses.AddAsync(course, cancellationToken);
         await context.SaveChangesAsync(cancellationToken);
+
+        if (request.Picture is not null)
+        {
+            using MemoryStream memoryStream = new();
+            await request.Picture.CopyToAsync(memoryStream, cancellationToken);
+            byte[] pictureAsByteArray = memoryStream.ToArray();
+
+            UploadCoursePictureCommand coursePictureUploadedEvent = new(
+                course.Id, 
+                pictureAsByteArray, 
+                request.Picture.FileName);
+
+            await publishEndpoint.Publish(coursePictureUploadedEvent, cancellationToken);
+        }
 
         return ServiceResult<Guid>.SuccessAsCreated(course.Id, $"/api/courses/{course.Id}");
     }

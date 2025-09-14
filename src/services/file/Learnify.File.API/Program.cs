@@ -9,7 +9,7 @@ builder.Services.AddSingleton<IFileProvider>(new PhysicalFileProvider(Path.Combi
 builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);
 builder.Services.AddCommonServiceExt();
 builder.Services.AddApiVersioningExt();
-builder.Services.AddCommonMassTransitExt(builder.Configuration);
+builder.Services.AddMassTransitExt(builder.Configuration);
 
 var app = builder.Build();
 

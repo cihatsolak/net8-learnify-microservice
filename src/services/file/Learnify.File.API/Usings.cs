@@ -1,10 +1,15 @@
 global using Asp.Versioning.Builder;
 global using Learnify.Bus;
+global using Learnify.Bus.Commands;
+global using Learnify.Bus.Events;
+global using Learnify.File.API;
+global using Learnify.File.API.Consumers;
 global using Learnify.File.API.Features;
 global using Learnify.File.API.Features.Delete;
 global using Learnify.File.API.Features.Upload;
 global using Learnify.Shared;
 global using Learnify.Shared.Extensions;
+global using MassTransit;
 global using MediatR;
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.Extensions.FileProviders;
