@@ -18,6 +18,8 @@ builder.Services.AddCommonServiceExt();
 builder.Services.AddApiVersioningExt();
 builder.Services.AddCommonMassTransitExt(builder.Configuration);
 
+builder.Services.AddRefitConfiguration(builder.Configuration);
+
 var app = builder.Build();
 app.AddOrderGroupEndpointExt(app.GetVersionSetExt());
 

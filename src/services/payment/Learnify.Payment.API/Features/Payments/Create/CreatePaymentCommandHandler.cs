@@ -19,9 +19,9 @@ public static class CreatePaymentCommandEndpoint
 }
 
 public sealed class CreatePaymentCommandHandler(AppDbContext appDbContext, IIdentityService identityService)
-        : IRequestHandler<CreatePaymentCommand, ServiceResult<Guid>>
+        : IRequestHandler<CreatePaymentCommand, ServiceResult<CreatePaymentResponse>>
 {
-    public async Task<ServiceResult<Guid>> Handle(CreatePaymentCommand request, CancellationToken cancellationToken)
+    public async Task<ServiceResult<CreatePaymentResponse>> Handle(CreatePaymentCommand request, CancellationToken cancellationToken)
     {
         var (isSuccess, errorMessage) = await ExternalPaymentProcessAsync(
             request.CardNumber,
@@ -32,20 +32,18 @@ public sealed class CreatePaymentCommandHandler(AppDbContext appDbContext, IIden
 
         if (!isSuccess)
         {
-            return ServiceResult<Guid>.Error("Payment Failed", errorMessage, StatusCodes.Status400BadRequest);
+            return ServiceResult<CreatePaymentResponse>.Error("Payment Failed", errorMessage, StatusCodes.Status400BadRequest);
         }
-
 
         var userId = identityService.UserId;
         var newPayment = new Repositories.Payment(userId, request.OrderCode, request.Amount);
         newPayment.SetStatus(PaymentStatus.Success);
 
-        appDbContext.Payments.Add(newPayment);
+        await appDbContext.Payments.AddAsync(newPayment, cancellationToken);
         await appDbContext.SaveChangesAsync(cancellationToken);
 
-        return ServiceResult<Guid>.SuccessAsOk(newPayment.Id);
+        return ServiceResult<CreatePaymentResponse>.SuccessAsOk(new CreatePaymentResponse(newPayment.Id, true, null));
     }
-
 
     private async static Task<(bool isSuccess, string? errorMessage)> ExternalPaymentProcessAsync(
         string cardNumber,

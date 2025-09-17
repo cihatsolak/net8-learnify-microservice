@@ -6,9 +6,9 @@ public record CreatePaymentCommand(
         string CardHolderName,
         string CardExpirationDate,
         string CardSecurityNumber,
-        decimal Amount) : IRequestResult<Guid>;
+        decimal Amount) : IRequestResult<CreatePaymentResponse>;
 
-public record CreatePaymentResponse(bool Status, string? ErrorMessage);
+public record CreatePaymentResponse(Guid PaymentId, bool Status, string? ErrorMessage);
 
 public class CreatePaymentCommandValidator : AbstractValidator<CreatePaymentCommand>
 {
