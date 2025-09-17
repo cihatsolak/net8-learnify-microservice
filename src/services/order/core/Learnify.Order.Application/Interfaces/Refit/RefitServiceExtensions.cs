@@ -1,9 +1,11 @@
 ﻿namespace Learnify.Order.Application.Interfaces.Refit;
 
-public static class RefitConfiguration
+public static class RefitServiceExtensions
 {
     public static IServiceCollection AddRefitConfiguration(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddScoped<AuthenticatedHttpClientHandler>();
+
         var addressUrlOptions = configuration.GetSection(nameof(AddressUrlOptions)).Get<AddressUrlOptions>();
 
         services.AddRefitClient<IPaymentService>()
@@ -11,7 +13,8 @@ public static class RefitConfiguration
             {
                 cfg.BaseAddress = new Uri(addressUrlOptions?.PaymentService.BaseUrl 
                     ?? throw new InvalidOperationException("PaymentService BaseUrl is not configured."));
-            });
+            })
+            .AddHttpMessageHandler<AuthenticatedHttpClientHandler>();
 
         return services;
     }
