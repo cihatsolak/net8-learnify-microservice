@@ -1,10 +1,13 @@
-﻿namespace Learnify.Order.Application.Features.Orders.Create;
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace Learnify.Order.Application.Features.Orders.Create;
 
 public sealed class CreateOrderCommandHandler(
     IOrderRepository orderRepository,
     IIdentityService identityService,
     IUnitOfWork unitOfWork,
-    IPublishEndpoint publishEndpoint) : IRequestHandler<CreateOrderCommand, ServiceResult>
+    IPublishEndpoint publishEndpoint,
+    IPaymentService paymentService) : IRequestHandler<CreateOrderCommand, ServiceResult>
 {
     public async Task<ServiceResult> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
@@ -32,12 +35,24 @@ public sealed class CreateOrderCommandHandler(
         await orderRepository.AddAsync(order);
         await unitOfWork.CommitAsync(cancellationToken);
 
-        var paymentId = Guid.Empty;
+        //Ödeme servisi çağrılacak
+        CreatePaymentRequest createPaymentRequest = new
+            (
+            order.Code,
+            request.Payment.CardNumber,
+            request.Payment.CardHolderName,
+            request.Payment.Expiration,
+            request.Payment.Cvv,
+            order.TotalPrice
+            );
 
+        CreatePaymentResponse createPaymentResponse = await paymentService.CreateAsync(createPaymentRequest);
+        if (!createPaymentResponse.Status)
+        {
+            return ServiceResult.Error("Payment failed", StatusCodes.Status400BadRequest);
+        }
 
-        //Payment işlemleri yapılacak
-
-        order.SetPaidStatus(paymentId);
+        order.SetPaidStatus(createPaymentResponse.PaymentId);
 
         orderRepository.Update(order);
         await unitOfWork.CommitAsync(cancellationToken);
