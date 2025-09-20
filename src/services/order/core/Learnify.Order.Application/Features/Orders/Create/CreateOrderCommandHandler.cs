@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace Learnify.Order.Application.Features.Orders.Create;
+﻿namespace Learnify.Order.Application.Features.Orders.Create;
 
 public sealed class CreateOrderCommandHandler(
     IOrderRepository orderRepository,
