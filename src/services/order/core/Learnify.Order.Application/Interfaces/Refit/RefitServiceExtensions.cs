@@ -5,6 +5,17 @@ public static class RefitServiceExtensions
     public static IServiceCollection AddRefitConfiguration(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddScoped<AuthenticatedHttpClientHandler>();
+        services.AddScoped<ClientAuthenticatedHttpClientHandler>();
+
+        services.AddOptions<IdentityOptions>()
+               .BindConfiguration(nameof(IdentityOptions))
+               .ValidateDataAnnotations()
+               .ValidateOnStart();
+
+        services.AddOptions<ClientSecretOptions>()
+               .BindConfiguration(nameof(ClientSecretOptions))
+               .ValidateDataAnnotations()
+               .ValidateOnStart();
 
         var addressUrlOptions = configuration.GetSection(nameof(AddressUrlOptions)).Get<AddressUrlOptions>();
 

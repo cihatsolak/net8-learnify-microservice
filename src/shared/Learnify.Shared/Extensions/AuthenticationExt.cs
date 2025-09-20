@@ -16,7 +16,7 @@ public static class AuthenticationExt
         services.AddAuthentication()
             .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
             {
-                options.Authority = identityOptions.Authority;
+                options.Authority = identityOptions.Address;
                 options.Audience = identityOptions.Audience;
                 options.RequireHttpsMetadata = false; //keycloak https üzerinden ayağa kalkmadığı için kapadım.
 
@@ -32,7 +32,7 @@ public static class AuthenticationExt
             })
             .AddJwtBearer("ClientCredantialSchema", options =>
             {
-                options.Authority = identityOptions.Authority;
+                options.Authority = identityOptions.Address;
                 options.Audience = identityOptions.Audience;
                 options.RequireHttpsMetadata = false; //keycloak https üzerinden ayağa kalkmadığı için kapadım.
 

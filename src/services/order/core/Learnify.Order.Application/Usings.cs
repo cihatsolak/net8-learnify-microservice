@@ -1,4 +1,5 @@
 ﻿global using AutoMapper;
+global using Duende.IdentityModel.Client;
 global using FluentValidation;
 global using Learnify.Bus.Events;
 global using Learnify.Order.Application.Features.Orders.Create;
@@ -13,6 +14,7 @@ global using MediatR;
 global using Microsoft.AspNetCore.Http;
 global using Microsoft.Extensions.Configuration;
 global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.Options;
 global using Microsoft.Net.Http.Headers;
 global using Refit;
 global using System.Linq.Expressions;
