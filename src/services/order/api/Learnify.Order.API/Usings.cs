@@ -3,6 +3,7 @@ global using Learnify.Bus;
 global using Learnify.Order.API.Endpoints.CreateOrder;
 global using Learnify.Order.API.Endpoints.Orders;
 global using Learnify.Order.API.Features.GetOrders;
+global using Learnify.Order.Application.BackgroundServices;
 global using Learnify.Order.Application.Features.Orders.Create;
 global using Learnify.Order.Application.Interfaces;
 global using Learnify.Order.Application.Interfaces.Refit;

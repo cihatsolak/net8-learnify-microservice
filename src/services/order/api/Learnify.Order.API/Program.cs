@@ -20,6 +20,8 @@ builder.Services.AddCommonMassTransitExt(builder.Configuration);
 
 builder.Services.AddRefitConfiguration(builder.Configuration);
 
+builder.Services.AddHostedService<CheckPaymentStatusOrderBackgroundService>();
+
 var app = builder.Build();
 app.AddOrderGroupEndpointExt(app.GetVersionSetExt());
 

@@ -25,7 +25,8 @@ public static class RefitServiceExtensions
                 cfg.BaseAddress = new Uri(addressUrlOptions?.PaymentService.BaseUrl 
                     ?? throw new InvalidOperationException("PaymentService BaseUrl is not configured."));
             })
-            .AddHttpMessageHandler<AuthenticatedHttpClientHandler>();
+            .AddHttpMessageHandler<AuthenticatedHttpClientHandler>()
+            .AddHttpMessageHandler<ClientAuthenticatedHttpClientHandler>();
 
         return services;
     }
