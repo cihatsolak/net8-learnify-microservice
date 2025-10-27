@@ -5,6 +5,8 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddOptionsExt();
 
+builder.Services.AddHttpClient<SignUpService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
