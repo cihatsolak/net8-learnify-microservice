@@ -10,3 +10,4 @@ global using System.Net;
 global using System.Text.Json;
 global using System.Text.Json.Serialization;
 global using Learnify.Web.Services;
+global using Learnify.Web.Pages.Auth.SignIn;
