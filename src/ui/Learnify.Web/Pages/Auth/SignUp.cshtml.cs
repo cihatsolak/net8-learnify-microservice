@@ -11,22 +11,29 @@ public class SignUpModel(SignUpService signUpService) : PageModel
 
     public async Task<IActionResult> OnPostAsync()
     {
-        if (!ModelState.IsValid) 
+        if (!ModelState.IsValid)
             return Page();
 
-        var result = await signUpService.CreateAccount(SignUpViewModel);
+        var result = await signUpService.CreateAccountAsync(SignUpViewModel);
+
         if (result.IsFail)
         {
-            ModelState.AddModelError(string.Empty, result.Fail.Title);
-
-            if (!string.IsNullOrEmpty(result.Fail.Detail))
-            {
-                ModelState.AddModelError(string.Empty, result.Fail.Detail);
-            }
-
+            AddModelErrors(result);
             return Page();
         }
 
         return RedirectToPage("/Index");
+    }
+
+    private void AddModelErrors(ServiceResult result)
+    {
+        if (string.IsNullOrWhiteSpace(result.Fail?.Title) && string.IsNullOrWhiteSpace(result.Fail?.Detail))
+            return;
+
+        if (!string.IsNullOrWhiteSpace(result.Fail.Title))
+            ModelState.AddModelError(string.Empty, result.Fail.Title);
+
+        if (!string.IsNullOrWhiteSpace(result.Fail.Detail))
+            ModelState.AddModelError(string.Empty, result.Fail.Detail);
     }
 }
