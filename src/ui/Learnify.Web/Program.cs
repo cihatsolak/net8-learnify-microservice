@@ -6,6 +6,28 @@ builder.Services.AddRazorPages();
 builder.Services.AddOptionsExt();
 
 builder.Services.AddHttpClient<SignUpService>();
+builder.Services.AddHttpClient<SignInService>();
+
+builder.Services.AddScoped<TokenService>();
+builder.Services.AddHttpContextAccessor();
+
+
+builder.Services.AddAuthentication(configureOption =>
+{
+    configureOption.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    configureOption.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+})
+.AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+{
+    options.LoginPath = "/Auth/SignIn";
+    options.LogoutPath = "/Auth/SignOut";
+    options.Cookie.Name = "LearnifyWebCookie";
+    options.AccessDeniedPath = "/Auth/AccessDenied";
+    options.Cookie.HttpOnly = true; //Çerezin yalnýzca sunucu tarafýnda eriþilebilir olmasýný saðlar (JavaScript eriþemez).
+    options.SlidingExpiration = true; //Kullanýcý etkin olduðu sürece oturum süresini uzatýr.
+});
+
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
