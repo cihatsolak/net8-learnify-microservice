@@ -5,6 +5,10 @@ public class SignInModel(SignInService signInService) : PageModel
     [BindProperty] 
     public required SignInViewModel SignInViewModel { get; set; } = SignInViewModel.GetExampleModel;
 
+    public void OnGet()
+    {
+    }
+
     public async Task<IActionResult> OnPostAsync()
     {
         if (!ModelState.IsValid) 
