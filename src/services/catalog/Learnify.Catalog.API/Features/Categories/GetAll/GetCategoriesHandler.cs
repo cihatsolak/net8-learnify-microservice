@@ -9,7 +9,8 @@ public static class GetCategoriesEndpoint
             return await mediator.Send(new GetCategoriesQuery()).ToGenericResultAsync();
         })
         .WithName("GetCategories")
-        .MapToApiVersion(1, 0);
+        .MapToApiVersion(1, 0)
+        .RequireAuthorization(Policy.ClientCredential);
 
         return routeGroupBuilder;
     }

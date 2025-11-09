@@ -26,9 +26,15 @@ public static class AuthenticationExt
                     ValidateIssuerSigningKey = true,
                     ValidateLifetime = true,
                     ValidateIssuer = true,
-                    RoleClaimType = "roles",
-                    NameClaimType = "preferred_username"
+                    RoleClaimType = ClaimTypes.Role,
+                    NameClaimType = ClaimTypes.NameIdentifier
                 };
+
+                // AutomaticRefreshInterval: otomatik aralıkla metadata/JWKS yenileme (ör. 24saat)
+                options.AutomaticRefreshInterval = TimeSpan.FromHours(24);
+
+                // RefreshInterval: RequestRefresh() çağrıldıktan sonra beklenen min süre (ör. 30s)
+                options.RefreshInterval = TimeSpan.FromSeconds(30);
             })
             .AddJwtBearer("ClientCredantialSchema", options =>
             {
@@ -45,23 +51,26 @@ public static class AuthenticationExt
                 };
             });
 
-        services.AddAuthorization(options =>
-        {
-            options.AddPolicy(Policy.ClientCredential, policy =>
-            {
-                policy.AuthenticationSchemes.Add("ClientCredantialSchema");
-                policy.RequireClaim("client_id");
-                policy.RequireAuthenticatedUser();
-            });
-
-            options.AddPolicy(Policy.Password, policy =>
+        services.AddAuthorizationBuilder()
+            .AddPolicy(Policy.Instructor, policy =>
             {
                 policy.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
-                policy.RequireClaim(ClaimTypes.Email);
                 policy.RequireAuthenticatedUser();
+                policy.RequireClaim(ClaimTypes.Email);
+                policy.RequireRole(ClaimTypes.Role, "instructor");
+            })
+            .AddPolicy(Policy.Password, policy =>
+            {
+                policy.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
+                policy.RequireAuthenticatedUser();
+                policy.RequireClaim(ClaimTypes.Email);
 
+            })
+            .AddPolicy(Policy.ClientCredential, policy =>
+            {
+                policy.AuthenticationSchemes.Add("ClientCredantialSchema");
+                policy.RequireAuthenticatedUser();
             });
-        });
 
         return services;
     }

@@ -21,6 +21,7 @@ global using Learnify.Catalog.API.Features.Courses.Update;
 global using Learnify.Catalog.API.Options;
 global using Learnify.Catalog.API.Repositories;
 global using Learnify.Shared;
+global using Learnify.Shared.Constants;
 global using Learnify.Shared.Extensions;
 global using Learnify.Shared.Filters;
 global using MassTransit;
