@@ -11,9 +11,5 @@
  	<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.9" />
  	<PackageReference Include="Refit.HttpClientFactory" Version="8.0.0" />
  </ItemGroup>
-
- <ItemGroup>
-   <Folder Include="Pages\Instructor\" />
- </ItemGroup>
 	
 </Project>

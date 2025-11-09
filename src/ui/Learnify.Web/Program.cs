@@ -11,6 +11,8 @@ builder.Services.AddHttpClient<SignInService>();
 builder.Services.AddScoped<TokenService>();
 builder.Services.AddHttpContextAccessor();
 
+builder.Services.AddScoped<AuthenticatedHttpClientHandler>();
+builder.Services.AddScoped<ClientAuthenticatedHttpClientHandler>();
 
 builder.Services.AddAuthentication(configureOption =>
 {
@@ -28,6 +30,14 @@ builder.Services.AddAuthentication(configureOption =>
 });
 
 builder.Services.AddAuthorization();
+
+builder.Services.AddRefitClient<ICatalogRefitService>().ConfigureHttpClient(configure =>
+{
+    var microserviceOption = builder.Configuration.GetSection(nameof(MicroserviceOption)).Get<MicroserviceOption>();
+    configure.BaseAddress = new Uri(microserviceOption!.Catalog.BaseAddress);
+})
+.AddHttpMessageHandler<AuthenticatedHttpClientHandler>()
+.AddHttpMessageHandler<ClientAuthenticatedHttpClientHandler>();
 
 var app = builder.Build();
 

@@ -6,7 +6,7 @@ public sealed class ClientAuthenticatedHttpClientHandler(
 {
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {
-        if (httpContextAccessor?.HttpContext?.User?.Identity?.IsAuthenticated == true)
+        if (httpContextAccessor.HttpContext?.User?.Identity?.IsAuthenticated == true)
             return await base.SendAsync(request, cancellationToken);
 
         var tokenResponse = await tokenService.GetClientAccessToken();

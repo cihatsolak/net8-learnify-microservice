@@ -5,10 +5,7 @@ public sealed class AuthenticatedHttpClientHandler(IHttpContextAccessor httpCont
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {
         var httpContext = httpContextAccessor.HttpContext;
-        if (httpContext is null)
-            return await base.SendAsync(request, cancellationToken);
-
-        if (!httpContext.User.Identity?.IsAuthenticated ?? true)
+        if (httpContext?.User?.Identity?.IsAuthenticated != true)
             return await base.SendAsync(request, cancellationToken);
 
         var accessToken = await httpContext.GetTokenAsync(OpenIdConnectParameterNames.AccessToken);
