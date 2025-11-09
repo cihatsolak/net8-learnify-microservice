@@ -1,5 +1,7 @@
 ﻿global using Duende.IdentityModel.Client;
+global using Learnify.Shared.Extensions;
 global using Learnify.Web.DelegateHandlers;
+global using Learnify.Web.Dto;
 global using Learnify.Web.Extensions;
 global using Learnify.Web.Options;
 global using Learnify.Web.Pages.Auth.SignIn;
@@ -24,3 +26,4 @@ global using System.Text.Json;
 global using System.Text.Json.Serialization;
 global using System.Threading;
 global using System.Threading.Tasks;
+global using ProblemDetails = Microsoft.AspNetCore.Mvc.ProblemDetails;

@@ -1,7 +1,4 @@
-﻿using Refit;
-using ProblemDetails = Microsoft.AspNetCore.Mvc.ProblemDetails;
-
-namespace Learnify.Web.Services;
+﻿namespace Learnify.Web.Services;
 
 public class ServiceResult
 {

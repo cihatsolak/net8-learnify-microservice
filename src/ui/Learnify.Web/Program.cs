@@ -10,6 +10,8 @@ builder.Services.AddHttpClient<SignInService>();
 
 builder.Services.AddScoped<TokenService>();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<CatalogService>();
+builder.Services.AddScoped<UserService>();
 
 builder.Services.AddScoped<AuthenticatedHttpClientHandler>();
 builder.Services.AddScoped<ClientAuthenticatedHttpClientHandler>();

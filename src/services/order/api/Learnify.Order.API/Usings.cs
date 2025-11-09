@@ -12,6 +12,5 @@ global using Learnify.Order.Persistence.Repositories;
 global using Learnify.Shared.Extensions;
 global using Learnify.Shared.Filters;
 global using MediatR;
-global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.EntityFrameworkCore;
-global using Refit;
+global using ProblemDetails = Microsoft.AspNetCore.Mvc.ProblemDetails;
