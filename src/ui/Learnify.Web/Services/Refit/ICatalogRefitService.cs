@@ -1,4 +1,6 @@
-﻿namespace Learnify.Web.Services.Refit;
+﻿using Refit;
+
+namespace Learnify.Web.Services.Refit;
 
 public interface ICatalogRefitService
 {

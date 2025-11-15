@@ -1,4 +1,6 @@
-﻿namespace Learnify.Web.Services;
+﻿using Refit;
+
+namespace Learnify.Web.Services;
 
 public class CatalogService(
     ICatalogRefitService catalogRefitService,

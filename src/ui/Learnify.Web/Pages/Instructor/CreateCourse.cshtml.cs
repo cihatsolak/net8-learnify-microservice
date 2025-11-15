@@ -1,5 +1,6 @@
 namespace Learnify.Web.Pages.Instructor;
 
+[Authorize(Roles = "instructor")]
 public class CreateCourseModel(CatalogService catalogService) : PageModel
 {
     [BindProperty] 
