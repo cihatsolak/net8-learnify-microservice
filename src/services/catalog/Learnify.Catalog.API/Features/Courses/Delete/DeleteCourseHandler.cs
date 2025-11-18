@@ -12,7 +12,8 @@ public static class DeleteCourseEndpoint
        .MapToApiVersion(1, 0)
        .Produces<NoContentResult>(StatusCodes.Status204NoContent)
        .Produces<ProblemDetails>(StatusCodes.Status404NotFound)
-       .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError);
+       .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError)
+       .RequireAuthorization(Policy.Instructor);
 
         return routeGroupBuilder;
     }

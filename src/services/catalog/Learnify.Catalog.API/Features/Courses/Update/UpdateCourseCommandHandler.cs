@@ -11,7 +11,8 @@ public static class UpdateCourseCommandEndpoint
        .WithName("UpdateCourse")
        .MapToApiVersion(1, 0)
        .Produces<ServiceResult>(StatusCodes.Status204NoContent)
-       .AddEndpointFilter<ValidationFilter<UpdateCourseCommand>>();
+       .AddEndpointFilter<ValidationFilter<UpdateCourseCommand>>()
+       .RequireAuthorization(Policy.Instructor);
 
         return routeGroupBuilder;
     }

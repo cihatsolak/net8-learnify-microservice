@@ -25,7 +25,7 @@ public interface ICatalogRefitService
         [AliasAs("Name")] string Name,
         [AliasAs("Description")] string Description,
         [AliasAs("Price")] decimal Price,
-        [AliasAs("Picture")] StreamPart? Picture,
+        [AliasAs("Picture")] StreamPart Picture,
         [AliasAs("CategoryId")] string CategoryId);
 
 
