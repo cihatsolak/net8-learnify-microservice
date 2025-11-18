@@ -9,6 +9,6 @@ public static class PaymentEndpointExt
            .WithApiVersionSet(apiVersionSet)
            .CreatePaymentGroupItemEndpoint()
            .GetAllPaymentsByUserIdGroupItemEndpoint()
-           .GetAllPaymentsByUserIdGroupItemEndpoint();
+           .GetPaymentStatusGroupItemEndpoint();
     }
 }

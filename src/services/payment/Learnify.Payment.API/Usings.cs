@@ -4,6 +4,7 @@ global using Learnify.Bus;
 global using Learnify.Payment.API.Features.Payments;
 global using Learnify.Payment.API.Features.Payments.Create;
 global using Learnify.Payment.API.Features.Payments.GetAll;
+global using Learnify.Payment.API.Features.Payments.GetStatus;
 global using Learnify.Payment.API.Repositories;
 global using Learnify.Shared;
 global using Learnify.Shared.Constants;
