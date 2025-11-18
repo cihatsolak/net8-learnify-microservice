@@ -24,6 +24,7 @@ global using Learnify.Shared;
 global using Learnify.Shared.Constants;
 global using Learnify.Shared.Extensions;
 global using Learnify.Shared.Filters;
+global using Learnify.Shared.Services;
 global using MassTransit;
 global using MediatR;
 global using Microsoft.AspNetCore.Mvc;

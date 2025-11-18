@@ -20,7 +20,7 @@ public static class CreateCourseCommandEndpoint
     }
 }
 
-public sealed class CreateCourseCommandHandler(AppDbContext context, IMapper mapper, IPublishEndpoint publishEndpoint)
+public sealed class CreateCourseCommandHandler(AppDbContext context, IMapper mapper, IPublishEndpoint publishEndpoint, IIdentityService identityService)
     : IRequestHandler<CreateCourseCommand, ServiceResult<Guid>>
 {
     public async Task<ServiceResult<Guid>> Handle(CreateCourseCommand request, CancellationToken cancellationToken)
@@ -45,6 +45,7 @@ public sealed class CreateCourseCommandHandler(AppDbContext context, IMapper map
 
         var course = mapper.Map<Course>(request);
         course.Created = DateTime.Now;
+        course.UserId = identityService.UserId;
         course.Id = NewId.NextSequentialGuid();
         course.Feature = new()
         {

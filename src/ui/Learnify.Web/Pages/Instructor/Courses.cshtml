@@ -1,0 +1,73 @@
+﻿@page
+@model CoursesModel
+@{
+    Layout = "_Instructor_Layout";
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Picture</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Price</th>
+            <th scope="col">Category</th>
+            <th scope="col">Rating</th>
+            <th scope="col">Duration</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @if (Model.CourseViewModels.Any())
+        {
+            for (int i = 0; i < Model.CourseViewModels.Count; i++)
+            {
+                var course = Model.CourseViewModels[i];
+
+                <tr>
+                    <th scope="row">@(@i + 1)</th>
+
+                    <td>
+                        <course-thumbnail-picture width="100px"
+                                                  class="img-fluid img-thumbnail"
+                                                  src="@course.ImageUrl">
+                        </course-thumbnail-picture>
+                    </td>
+
+                    <td>@course.Name</td>
+                    <td>@course.TruncateDescription(100)</td>
+                    <td>@course.Price.ToString("C")</td>
+                    <td>@course.CategoryName</td>
+                    <td>@course.Rating</td>
+                    <td>@course.Duration</td>
+
+                    <td>
+                        <div class="btn-group" role="group">
+                            <a asp-page="Update"
+                               asp-route-id="@course.Id"
+                               class="btn btn-sm btn-primary">
+                                Edit
+                            </a>
+
+                            <a asp-page-handler="Delete"
+                               asp-route-id="@course.Id"
+                               class="btn btn-sm btn-danger">
+                                Delete
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="9" class="text-center text-muted py-4">
+                    No courses available.
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

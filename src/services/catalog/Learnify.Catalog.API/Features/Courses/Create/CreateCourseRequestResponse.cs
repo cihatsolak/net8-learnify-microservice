@@ -1,11 +1,14 @@
 ﻿namespace Learnify.Catalog.API.Features.Courses.Create;
 
-public sealed record CreateCourseCommand(string Name, 
-                                         string Description, 
-                                         decimal Price, 
-                                         IFormFile Picture,
-                                         Guid CategoryId)
-                                         : IRequestResult<Guid>;
+public sealed record CreateCourseCommand : IRequestResult<Guid>
+{
+    public string Name { get; init; }
+    public string Description { get; init; }
+    public decimal Price { get; init; }
+    public IFormFile Picture { get; init; }
+    public Guid CategoryId { get; init; }
+}
+
 
 public sealed class CreateCourseCommandValidator : AbstractValidator<CreateCourseCommand>
 {
