@@ -1,20 +1,18 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+namespace Learnify.Web.Pages;
 
-namespace Learnify.Web.Pages
+public class IndexModel(CatalogService catalogService) : BasePageModel
 {
-    public class IndexModel : PageModel
+    public List<CourseViewModel> Courses { get; set; } = [];
+
+
+    public async Task<IActionResult> OnGet()
     {
-        private readonly ILogger<IndexModel> _logger;
+        var coursesAsResult = await catalogService.GetAllCoursesAsync();
+        if (coursesAsResult.IsFail) 
+            return ErrorPage(coursesAsResult);
 
-        public IndexModel(ILogger<IndexModel> logger)
-        {
-            _logger = logger;
-        }
+        Courses = coursesAsResult.Data!;
 
-        public void OnGet()
-        {
-
-        }
+        return Page();
     }
 }

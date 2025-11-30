@@ -18,6 +18,8 @@ builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<AuthenticatedHttpClientHandler>();
 builder.Services.AddScoped<ClientAuthenticatedHttpClientHandler>();
 
+builder.Services.AddExceptionHandler<UnauthorizedAccessExceptionHandler>();
+
 builder.Services.AddAuthentication(configureOption =>
 {
     configureOption.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
