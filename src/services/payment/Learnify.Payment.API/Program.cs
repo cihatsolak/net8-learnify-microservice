@@ -16,6 +16,8 @@ builder.Services.AddCommonMassTransitExt(builder.Configuration);
 
 var app = builder.Build();
 
+app.UseExceptionHandler(x => { });
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

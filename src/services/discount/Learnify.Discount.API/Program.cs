@@ -14,6 +14,8 @@ builder.Services.AddCommonMassTransitExt(builder.Configuration);
 
 var app = builder.Build();
 
+app.UseExceptionHandler(x => { });
+
 app.AddDiscountGroupEndpointExt(app.GetVersionSetExt());
 
 if (app.Environment.IsDevelopment())

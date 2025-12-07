@@ -19,6 +19,8 @@ builder.Services.AddStackExchangeRedisCache(options =>
 
 var app = builder.Build();
 
+app.UseExceptionHandler(x => { });
+
 app.AddBasketGroupEndpointExt(app.GetVersionSetExt());
 
 // Configure the HTTP request pipeline.

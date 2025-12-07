@@ -14,6 +14,8 @@ builder.Services.AddApiVersioningExt();
 
 var app = builder.Build();
 
+app.UseExceptionHandler(x => { });
+
 app.AddCategoryGroupEndpointExt(app.GetVersionSetExt());
 app.AddCourseGroupEndpointExt(app.GetVersionSetExt());
 

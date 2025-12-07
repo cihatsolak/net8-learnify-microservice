@@ -23,6 +23,9 @@ builder.Services.AddRefitConfiguration(builder.Configuration);
 builder.Services.AddHostedService<CheckPaymentStatusOrderBackgroundService>();
 
 var app = builder.Build();
+
+app.UseExceptionHandler(x => { });
+
 app.AddOrderGroupEndpointExt(app.GetVersionSetExt());
 
 if (app.Environment.IsDevelopment())

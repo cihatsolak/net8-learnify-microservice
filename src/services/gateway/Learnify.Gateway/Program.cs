@@ -8,6 +8,8 @@ builder.Services.AddAuthenticationAndAuthorizationExt(builder.Configuration);
 
 var app = builder.Build();
 
+app.UseExceptionHandler(x => { });
+
 app.MapReverseProxy();
 
 app.MapGet("/", () => "YARP (Gateway)");

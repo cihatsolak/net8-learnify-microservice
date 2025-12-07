@@ -13,6 +13,8 @@ builder.Services.AddMassTransitExt(builder.Configuration);
 
 var app = builder.Build();
 
+app.UseExceptionHandler(x => { });
+
 app.AddFileGroupEndpointExt(app.GetVersionSetExt());
 
 app.UseStaticFiles();
