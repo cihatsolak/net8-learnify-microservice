@@ -16,10 +16,16 @@ internal sealed class ClientAuthenticatedHttpClientHandler(
         var identityOptions = scope.ServiceProvider.GetRequiredService<IOptions<IdentityOptions>>();
         var clientSecretOptions = scope.ServiceProvider.GetRequiredService<IOptions<ClientSecretOptions>>();
 
+        var discoveryRequest = new DiscoveryDocumentRequest
+        {
+            Address = identityOptions.Value.Address,
+            Policy = { RequireHttps = false }
+        };
+
         var client = httpClientFactory.CreateClient();
         client.BaseAddress = new Uri(identityOptions.Value.Address);
 
-        var discoveryResponse = await client.GetDiscoveryDocumentAsync(cancellationToken: cancellationToken);
+        var discoveryResponse = await client.GetDiscoveryDocumentAsync(discoveryRequest, cancellationToken);
         if (discoveryResponse.IsError)
         {
             throw new EndpointException(client.BaseAddress, $"Discovery document request failed: {discoveryResponse.Error}");

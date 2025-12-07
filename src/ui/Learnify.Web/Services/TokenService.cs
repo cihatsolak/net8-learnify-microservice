@@ -45,10 +45,16 @@ public sealed class TokenService(IHttpClientFactory httpClientFactory, IdentityO
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(refreshToken);
 
+        var discoveryRequest = new DiscoveryDocumentRequest
+        {
+            Address = identityOption.Address,
+            Policy = { RequireHttps = false }
+        };
+
         var client = httpClientFactory.CreateClient("GetTokensByRefreshToken");
         client.BaseAddress = new Uri(identityOption.Address);
 
-        var discoveryResponse = await client.GetDiscoveryDocumentAsync();
+        var discoveryResponse = await client.GetDiscoveryDocumentAsync(discoveryRequest);
         if (discoveryResponse.IsError)
         {
             logger.LogError("Discovery document request failed: {Error}", discoveryResponse.Error);
@@ -74,10 +80,16 @@ public sealed class TokenService(IHttpClientFactory httpClientFactory, IdentityO
 
     public async Task<TokenResponse> GetClientAccessToken()
     {
+        var discoveryRequest = new DiscoveryDocumentRequest
+        {
+            Address = identityOption.Address,
+            Policy = { RequireHttps = false }
+        };
+
         var client = httpClientFactory.CreateClient("GetClientAccessToken");
         client.BaseAddress = new Uri(identityOption.Address);
-        var discoveryResponse = await client.GetDiscoveryDocumentAsync();
 
+        var discoveryResponse = await client.GetDiscoveryDocumentAsync(discoveryRequest);
         if (discoveryResponse.IsError)
         {
             logger.LogError("Discovery document request failed: {Error}", discoveryResponse.Error);

@@ -55,9 +55,15 @@ public sealed class SignUpService(IdentityOption identityOption, HttpClient clie
 
     private async Task<string> GetAdminAccessTokenAsync()
     {
+        var discoveryRequest = new DiscoveryDocumentRequest
+        {
+            Address = identityOption.Address,
+            Policy = { RequireHttps = false }
+        };
+
         client.BaseAddress = new Uri(identityOption.Address);
 
-        var discovery = await client.GetDiscoveryDocumentAsync();
+        var discovery = await client.GetDiscoveryDocumentAsync(discoveryRequest);
         if (discovery.IsError)
         {
             logger.LogError("Discovery document request failed: {Error}", discovery.Error);

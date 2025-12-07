@@ -41,9 +41,15 @@ public class SignInService(
 
     private async Task<TokenResponse> RequestAccessTokenAsync(SignInViewModel signInViewModel)
     {
+        var discoveryRequest = new DiscoveryDocumentRequest
+        {
+            Address = identityOption.Address,
+            Policy = { RequireHttps = false }
+        };
+
         client.BaseAddress = new Uri(identityOption.Address);
 
-        var discoveryResponse = await client.GetDiscoveryDocumentAsync();
+        var discoveryResponse = await client.GetDiscoveryDocumentAsync(discoveryRequest);
         if (discoveryResponse.IsError)
         {
             logger.LogError("Discovery document alınamadı. Hata: {Error}", discoveryResponse.Error);
