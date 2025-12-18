@@ -1,4 +1,5 @@
 using Refit;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,6 +47,17 @@ builder.Services.AddRefitClient<ICatalogRefitService>().ConfigureHttpClient(conf
 .AddHttpMessageHandler<ClientAuthenticatedHttpClientHandler>();
 
 var app = builder.Build();
+
+var cultureInfo = new CultureInfo("en-US");
+CultureInfo.DefaultThreadCurrentCulture = cultureInfo; // Parasal ve tarih formatlarý için ayarla
+CultureInfo.DefaultThreadCurrentUICulture = cultureInfo; // UI için de ayarla (validation hatasý gibi)
+
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture(cultureInfo),
+    SupportedCultures = [cultureInfo],
+    SupportedUICultures = [cultureInfo]
+});
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
