@@ -1,6 +1,7 @@
 
 services:
   learnify.basket.api:
+    restart: always
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
@@ -11,54 +12,127 @@ services:
       - ConnectionStrings:Redis=redis.db.basket:6379,password=Password12 
     ports:
       - "8080"
+    depends_on:
+      - redis.db.basket
+      - keycloak
+      - rabbitmq
 
   learnify.catalog.api:
+    restart: always
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
+      - BusOptions:HostAddress=rabbitmq
+      - BusOptions:Port=5672
+      - IdentityOptions:Address=http://keycloak:8080/realms/LearnifyTenant
+      - IdentityOptions:Issuer=http://keycloak:8080/realms/LearnifyTenant
+      - MongoDbOption:ConnectionString=mongodb://admin:admin@mongo.db.catalog:27017 #docker içinden eriþeceðimiz port.
     ports:
       - "8080"
+    depends_on:
+      - mongo.db.catalog
+      - keycloak
+      - rabbitmq
       
   learnify.discount.api:
+    restart: always
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
+      - BusOptions:HostAddress=rabbitmq
+      - BusOptions:Port=5672
+      - IdentityOptions:Address=http://keycloak:8080/realms/LearnifyTenant
+      - IdentityOptions:Issuer=http://keycloak:8080/realms/LearnifyTenant
+      - MongoDbOption:ConnectionString=mongodb://admin:admin@mongo.db.discount:27017 #docker içinden eriþeceðimiz port.
     ports:
       - "8080"
+    depends_on:
+      - mongo.db.discount
+      - keycloak
+      - rabbitmq
 
   learnify.file.api:
+    restart: always
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
+      - BusOptions:HostAddress=rabbitmq
+      - BusOptions:Port=5672
+      - IdentityOptions:Address=http://keycloak:8080/realms/LearnifyTenant
+      - IdentityOptions:Issuer=http://keycloak:8080/realms/LearnifyTenant
     ports:
       - "8080"
+    depends_on:
+      - keycloak
+      - rabbitmq
 
   learnify.gateway:
+    restart: always
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
+      - IdentityOptions:Address=http://keycloak:8080/realms/LearnifyTenant
+      - IdentityOptions:Issuer=http://keycloak:8080/realms/LearnifyTenant
     ports:
       - "8080"
-
+    depends_on:
+      - keycloak
 
   learnify.order.api:
+    restart: always
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
+      - BusOptions:HostAddress=rabbitmq
+      - BusOptions:Port=5672
+      - IdentityOptions:Address=http://keycloak:8080/realms/LearnifyTenant
+      - IdentityOptions:Issuer=http://keycloak:8080/realms/LearnifyTenant
+      - AddressUrlOptions:PaymentService:BaseUrl=http://learnify.payment.api:8080 #docker içinden eriþeceðimiz servis adý ve portu. (8080)
+      - ConnectionStrings:SqlServer=Server=sqlserver.db.order,1433;Database=OrderDb;User=Sa;Password=Password12*;Trusted_Connection=False;TrustServerCertificate=True;Integrated Security=False
     ports:
       - "8080"
+    depends_on:
+      - sqlserver.db.order
+      - keycloak
+      - rabbitmq
+      - learnify.payment.api
 
   learnify.payment.api:
+    restart: always
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
+      - BusOptions:HostAddress=rabbitmq
+      - BusOptions:Port=5672
+      - IdentityOptions:Address=http://keycloak:8080/realms/LearnifyTenant
+      - IdentityOptions:Issuer=http://keycloak:8080/realms/LearnifyTenant 
     ports:
       - "8080"
+    depends_on:
+      - keycloak
+      - rabbitmq
 
   learnify.web:
+    restart: always
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
+      - MicroserviceOption:Catalog:BaseAddress=http://learnify.catalog.api:8080
+      - MicroserviceOption:File:BaseAddress=http://learnify.file.api:8080
+      - MicroserviceOption:Basket:BaseAddress=http://learnify.basket.api:8080
+      - MicroserviceOption:Discount:BaseAddress=http://learnify.discount.api:8080
+      - MicroserviceOption:Order:BaseAddress=http://learnify.order.api:8080
+      - GatewayOption:BaseAddress=http://learnify.gateway:8080
+      - IdentityOption:Address=http://keycloak:8080/realms/udemyTenant
+      - IdentityOption:BaseAddress=http://keycloak:8080
     ports:
       - "5050:8080"
+    depends_on:
+      - learnify.catalog.api
+      - learnify.file.api
+      - learnify.basket.api
+      - learnify.discount.api
+      - learnify.order.api
+      - learnify.gateway
+      - keycloak
 
