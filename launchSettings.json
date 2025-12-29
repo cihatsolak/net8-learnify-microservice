@@ -4,7 +4,13 @@
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
       "serviceActions": {
-        "learnify.catalog.api": "StartDebugging"
+        "learnify.catalog.api": "StartDebugging",
+        "learnify.basket.api": "StartDebugging",
+        "learnify.file.api": "StartDebugging",
+        "learnify.gateway": "StartDebugging",
+        "learnify.order.api": "StartDebugging",
+        "learnify.payment.api": "StartDebugging",
+        "learnify.web": "StartDebugging"
       }
     }
   }

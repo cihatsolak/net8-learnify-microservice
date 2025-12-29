@@ -130,6 +130,54 @@ services:
     volumes:
       - rabbitmq.volume:/var/lib/rabbitmq
 
+  learnify.basket.api:
+    image: learnifybasketapi
+    build:
+      context: .
+      dockerfile: src/services/basket/Learnify.Basket.API/Dockerfile
+
+  learnify.catalog.api:
+    image: learnifycatalogapi
+    build:
+      context: .
+      dockerfile: src/services/catalog/Learnify.Catalog.API/Dockerfile
+
+  learnify.discount.api:
+    image: learnifydiscountapi
+    build:
+      context: .
+      dockerfile: src/services/discount/Learnify.Discount.API/Dockerfile
+
+  learnify.file.api:
+    image: learnifyfileapi
+    build:
+      context: .
+      dockerfile: src/services/file/Learnify.File.API/Dockerfile
+
+  learnify.gateway:
+    image: learnifygateway
+    build:
+      context: .
+      dockerfile: src/services/gateway/Learnify.Gateway/Dockerfile
+
+  learnify.order.api:
+    image: learnifyorderapi
+    build:
+      context: .
+      dockerfile: src/services/order/api/Learnify.Order.API/Dockerfile
+
+  learnify.payment.api:
+    image: learnifypaymentapi
+    build:
+      context: .
+      dockerfile: src/services/payment/Learnify.Payment.API/Dockerfile
+
+  learnify.web:
+    image: learnifyweb
+    build:
+      context: .
+      dockerfile: src/ui/Learnify.Web/Dockerfile
+
 volumes:
   mongo.db.catalog.volume:
   redis.db.basket.volume:  
@@ -138,3 +186,10 @@ volumes:
   postgres.db.keycloak.volume:
   # postgres.db.keycloak.ui.volume:
   rabbitmq.volume:
+
+
+
+
+
+
+
