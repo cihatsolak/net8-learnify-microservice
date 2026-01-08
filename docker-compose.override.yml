@@ -69,7 +69,7 @@ services:
   learnify.gateway:
     restart: always
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_HTTP_PORTS=8080
       - IdentityOptions:Address=http://keycloak:8080/realms/LearnifyTenant
       - IdentityOptions:Issuer=http://keycloak:8080/realms/LearnifyTenant
