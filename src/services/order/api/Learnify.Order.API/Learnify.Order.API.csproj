@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\LearnifyMicroservice.ServiceDefaults\LearnifyMicroservice.ServiceDefaults.csproj" />
     <ProjectReference Include="..\..\..\..\shared\Learnify.Shared\Learnify.Shared.csproj" />
     <ProjectReference Include="..\..\infrastructure\Learnify.Order.Persistence\Learnify.Order.Persistence.csproj" />
   </ItemGroup>

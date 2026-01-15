@@ -3,6 +3,8 @@ using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.AddServiceDefaults();
+
 // Add services to the container.
 builder.Services.AddRazorPages();
 
@@ -32,8 +34,8 @@ builder.Services.AddAuthentication(configureOption =>
     options.LogoutPath = "/Auth/SignOut";
     options.Cookie.Name = "LearnifyWebCookie";
     options.AccessDeniedPath = "/Auth/AccessDenied";
-    options.Cookie.HttpOnly = true; //Çerezin yalnızca sunucu tarafında erişilebilir olmasını sağlar (JavaScript erişemez).
-    options.SlidingExpiration = true; //Kullanıcı etkin olduğu sürece oturum süresini uzatır.
+    options.Cookie.HttpOnly = true; //Ã‡erezin yalnÄ±zca sunucu tarafÄ±nda eriÅŸilebilir olmasÄ±nÄ± saÄŸlar (JavaScript eriÅŸemez).
+    options.SlidingExpiration = true; //KullanÄ±cÄ± etkin olduÄŸu sÃ¼rece oturum sÃ¼resini uzatÄ±r.
 });
 
 builder.Services.AddAuthorization();
@@ -48,9 +50,11 @@ builder.Services.AddRefitClient<ICatalogRefitService>().ConfigureHttpClient(conf
 
 var app = builder.Build();
 
+app.MapDefaultEndpoints();
+
 var cultureInfo = new CultureInfo("en-US");
-CultureInfo.DefaultThreadCurrentCulture = cultureInfo; // Parasal ve tarih formatları için ayarla
-CultureInfo.DefaultThreadCurrentUICulture = cultureInfo; // UI için de ayarla (validation hatası gibi)
+CultureInfo.DefaultThreadCurrentCulture = cultureInfo; // Parasal ve tarih formatlarÄ± iÃ§in ayarla
+CultureInfo.DefaultThreadCurrentUICulture = cultureInfo; // UI iÃ§in de ayarla (validation hatasÄ± gibi)
 
 app.UseRequestLocalization(new RequestLocalizationOptions
 {
