@@ -3,7 +3,8 @@
 public static class DistributedApplicationServiceExtensions
 {
     public static IResourceBuilder<ProjectResource> AddCatalogService(
-        this IDistributedApplicationBuilder builder)
+        this IDistributedApplicationBuilder builder, 
+        IResourceBuilder<RabbitMQServerResource> rabbitMq)
     {
         var mongoUserName = builder.AddParameter("MONGO-USERNAME");
         var mongoPassword = builder.AddParameter("MONGO-PASSWORD");
@@ -14,16 +15,17 @@ public static class DistributedApplicationServiceExtensions
             .WithDataVolume("mongo.db.catalog.volume")
             .AddDatabase("catalog-db");
 
-        var catalogApi = builder
-            .AddProject<Projects.Learnify_Catalog_API>("learnify-catalog-api")
-            .WithReference(mongoCatalogDb)
-            .WaitFor(mongoCatalogDb);
+        var catalogApi = builder.AddProject<Projects.Learnify_Catalog_API>("learnify-catalog-api");
+
+        catalogApi.WithReference(mongoCatalogDb).WaitFor(mongoCatalogDb);
+        catalogApi.WithReference(rabbitMq).WaitFor(rabbitMq);
 
         return catalogApi;
     }
 
     public static IResourceBuilder<ProjectResource> AddBasketService(
-        this IDistributedApplicationBuilder builder)
+        this IDistributedApplicationBuilder builder, 
+        IResourceBuilder<RabbitMQServerResource> rabbitMq)
     {
         var redisPassword = builder.AddParameter("REDIS-PASSWORD");
 
@@ -33,16 +35,16 @@ public static class DistributedApplicationServiceExtensions
             .WithDataVolume("redis.db.basket.volume")
             .WithPassword(redisPassword);
 
-        var basketApi = builder
-                      .AddProject<Projects.Learnify_Basket_API>("learnify-basket-api")
-                      .WithReference(redisBasketDb)
-                      .WaitFor(redisBasketDb);
+        var basketApi = builder.AddProject<Projects.Learnify_Basket_API>("learnify-basket-api");
+        basketApi.WithReference(redisBasketDb).WaitFor(redisBasketDb);
+        basketApi.WithReference(rabbitMq).WaitFor(rabbitMq);
 
         return basketApi;
     }
 
     public static IResourceBuilder<ProjectResource> AddDiscountService(
-        this IDistributedApplicationBuilder builder)
+        this IDistributedApplicationBuilder builder, 
+        IResourceBuilder<RabbitMQServerResource> rabbitMq)
     {
         var mongoUserName = builder.AddParameter("MONGO-USERNAME");
         var mongoPassword = builder.AddParameter("MONGO-PASSWORD");
@@ -53,16 +55,17 @@ public static class DistributedApplicationServiceExtensions
             .WithDataVolume("mongo.db.discount.volume")
             .AddDatabase("discount-db");
 
-        var discoutntApi = builder
-             .AddProject<Projects.Learnify_Discount_API>("learnify-discount-api")
-             .WithReference(mongoDiscountDb)
-             .WaitFor(mongoDiscountDb);
+        var discoutntApi = builder.AddProject<Projects.Learnify_Discount_API>("learnify-discount-api");
+
+        discoutntApi.WithReference(mongoDiscountDb).WaitFor(mongoDiscountDb);
+        discoutntApi.WithReference(rabbitMq).WaitFor(rabbitMq);
 
         return discoutntApi;
     }
 
     public static IResourceBuilder<ProjectResource> AddOrderService(
-        this IDistributedApplicationBuilder builder)
+        this IDistributedApplicationBuilder builder, 
+        IResourceBuilder<RabbitMQServerResource> rabbitMq)
     {
         var sqlServerPassword = builder.AddParameter("SQLSERVER-SA-PASSWORD");
 
@@ -73,10 +76,10 @@ public static class DistributedApplicationServiceExtensions
             .WithImage("mcr.microsoft.com/mssql/server:2022-latest")
             .AddDatabase("order-db-aspire");
 
-        var orderApi = builder
-              .AddProject<Projects.Learnify_Order_API>("learnify-order-api")
-              .WithReference(sqlServerOrderDb)
-              .WaitFor(sqlServerOrderDb);
+        var orderApi = builder.AddProject<Projects.Learnify_Order_API>("learnify-order-api");
+        
+        orderApi.WithReference(sqlServerOrderDb).WaitFor(sqlServerOrderDb);
+        orderApi.WithReference(rabbitMq).WaitFor(rabbitMq);
 
         return orderApi;
     }
