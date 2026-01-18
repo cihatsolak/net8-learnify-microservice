@@ -6,10 +6,12 @@ builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<AppDbContext>(option =>
-{
-    option.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"));
-});
+builder.AddSqlServerDbContext<AppDbContext>("order-db-aspire");
+
+//builder.Services.AddDbContext<AppDbContext>(option =>
+//{
+//    option.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"));
+//});
 
 builder.Services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();

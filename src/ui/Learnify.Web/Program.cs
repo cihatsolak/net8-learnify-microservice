@@ -48,6 +48,7 @@ builder.Services.AddRefitClient<ICatalogRefitService>().ConfigureHttpClient(conf
 .AddHttpMessageHandler<AuthenticatedHttpClientHandler>()
 .AddHttpMessageHandler<ClientAuthenticatedHttpClientHandler>();
 
+
 var app = builder.Build();
 
 app.MapDefaultEndpoints();

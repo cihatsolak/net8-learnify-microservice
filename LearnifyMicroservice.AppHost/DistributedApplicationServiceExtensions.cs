@@ -2,7 +2,7 @@
 
 public static class DistributedApplicationServiceExtensions
 {
-    public static void AddCatalogService(
+    public static IResourceBuilder<ProjectResource> AddCatalogService(
         this IDistributedApplicationBuilder builder)
     {
         var mongoUserName = builder.AddParameter("MONGO-USERNAME");
@@ -18,9 +18,11 @@ public static class DistributedApplicationServiceExtensions
             .AddProject<Projects.Learnify_Catalog_API>("learnify-catalog-api")
             .WithReference(mongoCatalogDb)
             .WaitFor(mongoCatalogDb);
+
+        return catalogApi;
     }
 
-    public static void AddBasketService(
+    public static IResourceBuilder<ProjectResource> AddBasketService(
         this IDistributedApplicationBuilder builder)
     {
         var redisPassword = builder.AddParameter("REDIS-PASSWORD");
@@ -31,13 +33,15 @@ public static class DistributedApplicationServiceExtensions
             .WithDataVolume("redis.db.basket.volume")
             .WithPassword(redisPassword);
 
-        builder
-            .AddProject<Projects.Learnify_Basket_API>("learnify-basket-api")
-            .WithReference(redisBasketDb)
-            .WaitFor(redisBasketDb);
+        var basketApi = builder
+                      .AddProject<Projects.Learnify_Basket_API>("learnify-basket-api")
+                      .WithReference(redisBasketDb)
+                      .WaitFor(redisBasketDb);
+
+        return basketApi;
     }
 
-    public static void AddDiscountService(
+    public static IResourceBuilder<ProjectResource> AddDiscountService(
         this IDistributedApplicationBuilder builder)
     {
         var mongoUserName = builder.AddParameter("MONGO-USERNAME");
@@ -49,10 +53,32 @@ public static class DistributedApplicationServiceExtensions
             .WithDataVolume("mongo.db.discount.volume")
             .AddDatabase("discount-db");
 
-        builder
-            .AddProject<Projects.Learnify_Discount_API>("learnify-discount-api")
-            .WithReference(mongoDiscountDb)
-            .WaitFor(mongoDiscountDb);
+        var discoutntApi = builder
+             .AddProject<Projects.Learnify_Discount_API>("learnify-discount-api")
+             .WithReference(mongoDiscountDb)
+             .WaitFor(mongoDiscountDb);
+
+        return discoutntApi;
+    }
+
+    public static IResourceBuilder<ProjectResource> AddOrderService(
+        this IDistributedApplicationBuilder builder)
+    {
+        var sqlServerPassword = builder.AddParameter("SQLSERVER-SA-PASSWORD");
+
+        var sqlServerOrderDb = builder
+            .AddSqlServer("sqlserver-db-order")
+            .WithPassword(sqlServerPassword)
+            .WithDataVolume("sqlserver.db.order.volume")
+            .WithImage("mcr.microsoft.com/mssql/server:2022-latest")
+            .AddDatabase("order-db-aspire");
+
+        var orderApi = builder
+              .AddProject<Projects.Learnify_Order_API>("learnify-order-api")
+              .WithReference(sqlServerOrderDb)
+              .WaitFor(sqlServerOrderDb);
+
+        return orderApi;
     }
 }
 
