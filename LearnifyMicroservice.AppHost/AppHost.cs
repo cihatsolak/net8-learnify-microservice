@@ -1,8 +1,12 @@
+using LearnifyMicroservice.AppHost;
+
 var builder = DistributedApplication.CreateBuilder(args);
+
+builder.AddCatalogService(); //bu satýr katalog servisini ekliyor
 
 builder.AddProject<Projects.Learnify_Basket_API>("learnify-basket-api"); //bu isimler bizim domain isimleri olarak geçiyor
 
-builder.AddProject<Projects.Learnify_Catalog_API>("learnify-catalog-api");
+
 
 builder.AddProject<Projects.Learnify_Discount_API>("learnify-discount-api");
 
