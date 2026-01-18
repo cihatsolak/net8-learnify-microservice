@@ -14,10 +14,12 @@ builder.Services.AddCommonMassTransitExt(builder.Configuration);
 builder.Services.AddApiVersioningExt();
 builder.Services.AddCommonServiceExt();
 
-builder.Services.AddStackExchangeRedisCache(options =>
-{
-    options.Configuration = builder.Configuration.GetConnectionString("Redis");
-});
+builder.AddRedisDistributedCache("redis-db-basket"); //NET Aspire: Redis baðlantýsýný buradan alýyor
+
+//builder.Services.AddStackExchangeRedisCache(options =>
+//{
+//    options.Configuration = builder.Configuration.GetConnectionString("Redis");
+//});
 
 var app = builder.Build();
 
