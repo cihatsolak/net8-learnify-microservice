@@ -48,6 +48,29 @@ builder.Services.AddRefitClient<ICatalogRefitService>().ConfigureHttpClient(conf
 .AddHttpMessageHandler<AuthenticatedHttpClientHandler>()
 .AddHttpMessageHandler<ClientAuthenticatedHttpClientHandler>();
 
+builder.Services.AddRefitClient<IBasketRefitService>().ConfigureHttpClient(configure =>
+{
+    var microserviceOption = builder.Configuration.GetSection(nameof(MicroserviceOption)).Get<MicroserviceOption>();
+    configure.BaseAddress = new Uri(microserviceOption!.Basket.BaseAddress);
+})
+.AddHttpMessageHandler<AuthenticatedHttpClientHandler>()
+.AddHttpMessageHandler<ClientAuthenticatedHttpClientHandler>();
+
+builder.Services.AddRefitClient<IDiscountRefitService>().ConfigureHttpClient(configure =>
+{
+    var microserviceOption = builder.Configuration.GetSection(nameof(MicroserviceOption)).Get<MicroserviceOption>();
+    configure.BaseAddress = new Uri(microserviceOption!.Discount.BaseAddress);
+})
+.AddHttpMessageHandler<AuthenticatedHttpClientHandler>()
+.AddHttpMessageHandler<ClientAuthenticatedHttpClientHandler>();
+
+builder.Services.AddRefitClient<IOrderRefitService>().ConfigureHttpClient(configure =>
+{
+    var microserviceOption = builder.Configuration.GetSection(nameof(MicroserviceOption)).Get<MicroserviceOption>();
+    configure.BaseAddress = new Uri(microserviceOption!.Order.BaseAddress);
+})
+.AddHttpMessageHandler<AuthenticatedHttpClientHandler>()
+.AddHttpMessageHandler<ClientAuthenticatedHttpClientHandler>();
 
 var app = builder.Build();
 
